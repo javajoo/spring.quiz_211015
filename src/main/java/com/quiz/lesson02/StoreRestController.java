@@ -12,12 +12,12 @@ import com.quiz.lesson02.model.Store;
 @RestController
 public class StoreRestController {
 
-	
 	@Autowired
-	private StoreBO storeBO;
+	StoreBO storeBO;
 	
+	//http://localhost/lesson02/quiz01
 	@RequestMapping("/lesson02/quiz01")
 	public List<Store> quiz01() {
-		
+		return storeBO.getStoreList();
 	}
 }
