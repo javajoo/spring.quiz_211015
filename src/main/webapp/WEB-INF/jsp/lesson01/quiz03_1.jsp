@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>quiz03_1</title>
+<title>jsp 연동 연습문제</title>
 </head>
 <body>
 
