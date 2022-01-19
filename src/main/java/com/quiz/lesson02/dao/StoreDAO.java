@@ -11,4 +11,5 @@ public interface StoreDAO {
 
 	// 구현체가 없다.
 	public List<Store> selectStoreList();
+	// 먼저 만들고 mapper id 복사해주기
 }
