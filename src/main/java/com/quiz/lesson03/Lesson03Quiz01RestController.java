@@ -14,10 +14,12 @@ public class Lesson03Quiz01RestController {
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
-	@RequestParam()
 	//http://localhost/lesson03/quiz01/1?id=20
-	@RequestMapping("/lesson03/quiz01")
-	public RealEstate quiz01() {
-		return realEstateBO.getRealEstate();
+	@RequestMapping("/lesson03/quiz01/1")
+	public RealEstate quiz01_1(
+			@RequestParam(value="id") int id
+			){
+		return realEstateBO.getRealEstate(id);
 	}
+	
 }

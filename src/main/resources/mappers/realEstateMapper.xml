@@ -3,21 +3,27 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.quiz.lesson03.dao.RealEstateDAO">
- 	<select id="selectRealEstate" resultType="com.quiz.lesson03.model.RealEstate">
+ 	<select id="selectRealEstate" 
+ 	parameterType = "int"
+ 	resultType="com.quiz.lesson03.model.RealEstate">
 
 		SELECT
-		 	`id`
+			`id`
 			,`realtorId`
 			,`address`
 			,`area`
-			,``type`
+			,`type`
 			,`price`
 			,`rentPrice`
 			,`createdAt`
 			,`updatedAt`
 		FROM
-			`real_extate`
-		
-	
+			`real_estate`
+		WHERE
+			`id` = #{id}
+			
+
  	</select>
+ 	
  </mapper>
+ 

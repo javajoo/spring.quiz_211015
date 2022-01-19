@@ -12,7 +12,7 @@ public class RealEstateBO {
 	@Autowired
 	private RealEstateDAO realEstateDAO;
 	
-	public RealEstate getRealEstate() {
-		return realEstateDAO.selectRealEstate();
+	public RealEstate getRealEstate(int id) {
+		return realEstateDAO.selectRealEstate(id);
 	}
 }
