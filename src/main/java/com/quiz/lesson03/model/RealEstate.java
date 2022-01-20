@@ -4,24 +4,14 @@ import java.util.Date;
 
 public class RealEstate {
 
-	// desc 정보로 null인자 nullable인지 확인해야 한다.
-//	id int AI PK 
-//	realtorId int 
-//	address varchar(64) 
-//	area int 
-//	type char(2) 
-//	price int 
-//	rentPrice int nullable
-//	createdAt timestamp 
-//	updatedAt timestamp
-
+	// DB desc 정보로 null인자 nullable인지 확인해야 한다.
 	private int id;
 	private int realtorId;
 	private String address;
 	private int area;
 	private String type;
 	private int price;
-	private Integer rentPrice; // nullable 이니까 Integer로 해준다.
+	private Integer rentPrice; // nullable이니까 Integer로 해준다.
 	private Date createdAt;
 	private Date updatedAt;
 

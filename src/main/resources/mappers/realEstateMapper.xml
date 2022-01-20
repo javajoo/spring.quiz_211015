@@ -3,13 +3,11 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.quiz.lesson03.dao.RealEstateDAO">
- 	<!-- select문으로 추가해주면 된다. -->
- 	<select id="selectRealEstateById" 
- 	parameterType="int"
- 	resultType="com.quiz.lesson03.model.RealEstate">
- 		SELECT
+ <!-- select문으로 추가 해주면 된다. -->
+ 	<select id="setRealEstateById" resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT 
  			`id`
-			,`realtorId`
+			,`realtorId` 
 			,`address`
 			,`area`
 			,`type`
@@ -21,43 +19,14 @@
  			`real_estate`
  		WHERE
  			`id`=#{id}
- 		<!-- #{id} 유동적으로 바뀌는 값, 파라미터로 넘겨받은 값-->
+ 			<!-- #{id} 유동적으로 바뀌는 값, 파라미터로 받아온 값 -->
  	</select>
  	
  	
- 	
- 	 	<select id="selectRealEstateListByRentPrice" 
-	 	parameterType="Integer"
-	 	resultType="com.quiz.lesson03.model.RealEstate">
- 		SELECT
+ 		<select id="setRealEstateListByRentPrice" resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT 
  			`id`
-			,`realtorId`
-			,`address`
-			,`area`
-			,`type`
-			,`price`
-			,`rentPrice`
-			,`createdAt`
-			,`updatedAt`
- 		FROM
- 			`real_estate`
- 		GROUP BY `type`
- 		WHERE
- 		 <![CDATA[
- 			`rentPrice`<=#{rentPrice} 
- 		 ]]>
- 		 	<!-- 실제값 : 넘겨받은값 -->
-			<!-- #{rentPrice} : 파라미터로 넘겨받은 값 -->
- 	</select>
- 	
- 	
- 	<!-- parameterType : 2개 이상의 파라미터 가져온 경우 map으로 해주면 된다. -->
- 	 	 <select id="selectRealEstateListByAreaPrice" 
-	 	parameterType="map"
-	 	resultType="com.quiz.lesson03.model.RealEstate">
- 		SELECT
- 			`id`
-			,`realtorId`
+			,`realtorId` 
 			,`address`
 			,`area`
 			,`type`
@@ -68,20 +37,17 @@
  		FROM
  			`real_estate`
  		WHERE
- 		<!-- CDATA 사용 : WHERE 전체를 감싸주는게 관례적이다.  괄호의 갯수는 2개씩 맞춰준다.-->
  			<![CDATA[
- 			`type` = "매매"
- 			AND `area`>=#{area} 
- 			AND `price`<=#{price}
- 			ORDER BY `createdAt` DESC
- 		 ]]>
- 			 
+ 			`rentPrice`<=#{rentPrice}
+ 			]]>
+ 		<!--    실제값   :   넘겨받은 값  -->
  	</select>
-
-	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.model.RealEstate">
-		INSERT INTO `real_estate`
-		(
-			,`realtorId`
+ 	
+ 		<!-- parameterType : 2개 이상의 파라미터 가져온 경우 MAP으로 해주면 된다. -->
+ 		<select id="setRealEstateListByAreaPrice" parameterType="map" resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT 
+ 			`id`
+			,`realtorId` 
 			,`address`
 			,`area`
 			,`type`
@@ -89,19 +55,43 @@
 			,`rentPrice`
 			,`createdAt`
 			,`updatedAt`
-		)
-		
-		VALUES
-		(
-			#{realtorId}
-			, #{address}
-			, #{area}
-			, #{type}
-			, #{price}
-			, #{rentPrice}
-			, NOW()
-			, NOW()
-		)
-	</insert>
-
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+			<![CDATA[
+			`type`="매매" and
+			`area`>=#{area} and
+			`price`<=#{price}
+			]]>
+		ORDER BY
+			`id` DESC
+ 	</select>
+ 	
+ 	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.model.RealEstate">
+ 		INSERT INTO `real_estate`
+ 		(
+			`realtorId` 
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		
+ 		VALUES
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	
  </mapper>
