@@ -7,6 +7,8 @@ import com.quiz.lesson03.model.RealEstate;
 
 @Repository
 public interface RealEstateDAO {
-
 	public RealEstate selectRealEstate(@Param("id") int id);
+	public RealEstate selectRealEstate1(@Param("rentPrice") Integer rentPrice);
+	public RealEstate selectRealEstate2(@Param("area") int area, @Param("price") int price);
 }
+

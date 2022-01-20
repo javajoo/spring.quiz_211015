@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+ 
  <mapper namespace="com.quiz.lesson03.dao.RealEstateDAO">
  	<select id="selectRealEstate" 
- 	parameterType = "int"
+ 	parameterType="int"
  	resultType="com.quiz.lesson03.model.RealEstate">
-
-		SELECT
-			`id`
+ 		SELECT
+ 			`id`
 			,`realtorId`
 			,`address`
 			,`area`
@@ -17,13 +16,53 @@
 			,`rentPrice`
 			,`createdAt`
 			,`updatedAt`
-		FROM
-			`real_estate`
-		WHERE
-			`id` = #{id}
-			
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`id`=#{id}
+ 		
+ 	</select>
+ 	
+ 	
+ 	
+ 	 	<select id="selectRealEstate1" 
+ 	parameterType="Integer"
+ 	resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT
+ 			`id`
+			,`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`rentPrice`=#{rentPrice}
 
  	</select>
  	
+ 	
+ 	 	 	<select id="selectRealEstate2" 
+ 	parameterType="int"
+ 	resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT
+ 			`id`
+			,`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`area`=#{area} and `price`=#{price}
+ 	</select>
+
  </mapper>
- 
