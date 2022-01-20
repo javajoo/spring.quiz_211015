@@ -1,5 +1,7 @@
 package com.quiz.lesson03.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +14,26 @@ public class RealEstateBO {
 	@Autowired
 	private RealEstateDAO realEstateDAO;
 	
-	public RealEstate getRealEstate(int id) {
-		return realEstateDAO.selectRealEstate(id);
+	// 파라미터로 받는 id까지 넣어주면 더 명확해진다.
+	// int id : id가 필수값, null값 들어갈 수 없다. <규칙>
+	public RealEstate getRealEstateById(int id) {
+		return realEstateDAO.selectRealEstateById(id);
 	}
 	
-	@Autowired
-	private RealEstateDAO realEstateDAO1;
+
 	
-	public RealEstate getRealEstate1(Integer  rentPrice) {
-		return realEstateDAO1.selectRealEstate1(rentPrice);
+	public List<RealEstate> getRealEstateListByRentPrice(Integer rentPrice) {
+		return realEstateDAO.selectRealEstateListByRentPrice(rentPrice);
 	}
 	
+	// 파라미터 2개인 경우 2개 카멜로 써주면 된다.
+	public List<RealEstate> getRealEstateListByAreaPrice(int area,int price) {
+		return realEstateDAO.selectRealEstateListByAreaPrice(area, price);
+		// 자동완성시 파라미터 믿지말기!!! 자동완성 되서 다시 확인해줘야 한다.
+	}
 	
-	@Autowired
-	private RealEstateDAO realEstateDAO2;
-	
-	public RealEstate getRealEstate2(int area,int price) {
-		return realEstateDAO2.selectRealEstate2(area, price);
+	public int addRealEstate(RealEstate realEstate) {
+		return realEstateDAO.insertRealEstate(realEstate);
 	}
 
 	

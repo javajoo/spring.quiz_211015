@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class RealEstate {
 
+	// desc 정보로 null인자 nullable인지 확인해야 한다.
 //	id int AI PK 
 //	realtorId int 
 //	address varchar(64) 
 //	area int 
 //	type char(2) 
 //	price int 
-//	rentPrice int 
+//	rentPrice int nullable
 //	createdAt timestamp 
 //	updatedAt timestamp
 
@@ -20,65 +21,80 @@ public class RealEstate {
 	private int area;
 	private String type;
 	private int price;
-	private int rentPrice;
+	private Integer rentPrice; // nullable 이니까 Integer로 해준다.
 	private Date createdAt;
 	private Date updatedAt;
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getRealtorId() {
 		return realtorId;
 	}
+
 	public void setRealtorId(int realtorId) {
 		this.realtorId = realtorId;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public int getArea() {
 		return area;
 	}
+
 	public void setArea(int area) {
 		this.area = area;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public int getPrice() {
 		return price;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getRentPrice() {
+
+	public Integer getRentPrice() {
 		return rentPrice;
 	}
-	public void setRentPrice(int rentPrice) {
+
+	public void setRentPrice(Integer rentPrice) {
 		this.rentPrice = rentPrice;
 	}
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
+
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-	
 
 }

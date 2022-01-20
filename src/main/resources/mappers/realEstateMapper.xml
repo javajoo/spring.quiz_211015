@@ -3,7 +3,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.quiz.lesson03.dao.RealEstateDAO">
- 	<select id="selectRealEstate" 
+ 	<!-- select문으로 추가해주면 된다. -->
+ 	<select id="selectRealEstateById" 
  	parameterType="int"
  	resultType="com.quiz.lesson03.model.RealEstate">
  		SELECT
@@ -20,14 +21,40 @@
  			`real_estate`
  		WHERE
  			`id`=#{id}
- 		
+ 		<!-- #{id} 유동적으로 바뀌는 값, 파라미터로 넘겨받은 값-->
  	</select>
  	
  	
  	
- 	 	<select id="selectRealEstate1" 
- 	parameterType="Integer"
- 	resultType="com.quiz.lesson03.model.RealEstate">
+ 	 	<select id="selectRealEstateListByRentPrice" 
+	 	parameterType="Integer"
+	 	resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT
+ 			`id`
+			,`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		GROUP BY `type`
+ 		WHERE
+ 		 <![CDATA[
+ 			`rentPrice`<=#{rentPrice} 
+ 		 ]]>
+ 		 	<!-- 실제값 : 넘겨받은값 -->
+			<!-- #{rentPrice} : 파라미터로 넘겨받은 값 -->
+ 	</select>
+ 	
+ 	
+ 	<!-- parameterType : 2개 이상의 파라미터 가져온 경우 map으로 해주면 된다. -->
+ 	 	 <select id="selectRealEstateListByAreaPrice" 
+	 	parameterType="map"
+	 	resultType="com.quiz.lesson03.model.RealEstate">
  		SELECT
  			`id`
 			,`realtorId`
@@ -41,16 +68,19 @@
  		FROM
  			`real_estate`
  		WHERE
- 			`rentPrice`=#{rentPrice}
+ 		<!-- CDATA 사용 : WHERE 전체를 감싸주는게 관례적이다.  괄호의 갯수는 2개씩 맞춰준다.-->
+ 			<![CDATA[
+ 			`type` = "매매"
+ 			AND `area`>=#{area} 
+ 			AND `price`<=#{price}
+ 			ORDER BY `createdAt` DESC
+ 		 ]]>
+ 			 
+ 	</select>
 
- 	</select>
- 	
- 	
- 	 	 	<select id="selectRealEstate2" 
- 	parameterType="int"
- 	resultType="com.quiz.lesson03.model.RealEstate">
- 		SELECT
- 			`id`
+	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.model.RealEstate">
+		INSERT INTO `real_estate`
+		(
 			,`realtorId`
 			,`address`
 			,`area`
@@ -59,10 +89,19 @@
 			,`rentPrice`
 			,`createdAt`
 			,`updatedAt`
- 		FROM
- 			`real_estate`
- 		WHERE
- 			`area`=#{area} and `price`=#{price}
- 	</select>
+		)
+		
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 
  </mapper>

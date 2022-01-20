@@ -1,5 +1,7 @@
 package com.quiz.lesson03;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,46 +10,50 @@ import org.springframework.web.bind.annotation.RestController;
 import com.quiz.lesson03.bo.RealEstateBO;
 import com.quiz.lesson03.model.RealEstate;
 
+@RequestMapping("/lesson03/quiz01")
 @RestController
 public class Lesson03Quiz01RestController {
 
+	// 자바는 카멜케이스로 정의해주기!
 	// 1. id 로 select 하기
 	@Autowired
 	private RealEstateBO realEstateBO;
 	
 	//http://localhost/lesson03/quiz01/1?id=20
-	@RequestMapping("/lesson03/quiz01/1")
+	@RequestMapping("/1")
+	
+	// 단건 요청!!!!
 	public RealEstate quiz01_1(
+			// value = 키 이름 ( ? 뒤 id) 
 			@RequestParam(value="id") int id
-			) {
-		return realEstateBO.getRealEstate(id);
+			) { // 필수 파라미터로 받아온 id가 int id로 저장된다.
+		return realEstateBO.getRealEstateById(id); // jackson 라이브러리로 인해 json으로 변환
 	}
 	
 
 	// 2. 월세 조건 select
-	@Autowired
-	private RealEstateBO realEstateBO1;
-	
-	//http://localhost/lesson03/quiz01/2?rent_price=200  이것만 됌 부등호 안됌!!
+
 	//http://localhost/lesson03/quiz01/2?rent_price=90
-	@RequestMapping("/lesson03/quiz01/2")
-	public RealEstate quiz01_2(
+	@RequestMapping("/2")
+	// 여러건 : List
+	public List<RealEstate> quiz01_2(
+			//@RequestParam의 value는  ?rent_price와 완전히 일치해야 한다. 
+			// 메소드의 역할로 생각해야 한다.
 			@RequestParam(value="rent_price") Integer rentPrice
 			) {
-		return realEstateBO1.getRealEstate1(rentPrice);
+		return realEstateBO.getRealEstateListByRentPrice(rentPrice);
 	}
 	
 	// 3. 복합조건 select
-	@Autowired
-	private RealEstateBO realEstateBO2;
+
 	
 	//http://localhost/lesson03/quiz01/3?area=90&price=130000
-	@RequestMapping("/lesson03/quiz01/3")
-	public RealEstate quiz01_3(
+	@RequestMapping("/3")
+	public List<RealEstate> quiz01_3(
 			@RequestParam(value="area") int area,
 			@RequestParam(value="price") int price
 			) {
-		return realEstateBO2.getRealEstate2(area, price);
+		return realEstateBO.getRealEstateListByAreaPrice(area, price);
 	}
 	
 	
