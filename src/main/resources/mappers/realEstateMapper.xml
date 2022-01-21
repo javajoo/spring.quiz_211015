@@ -4,7 +4,7 @@
  
  <mapper namespace="com.quiz.lesson03.dao.RealEstateDAO">
  <!-- select문으로 추가 해주면 된다. -->
- 	<select id="setRealEstateById" resultType="com.quiz.lesson03.model.RealEstate">
+ 	<select id="selectRealEstateById" resultType="com.quiz.lesson03.model.RealEstate">
  		SELECT 
  			`id`
 			,`realtorId` 
@@ -23,7 +23,7 @@
  	</select>
  	
  	
- 		<select id="setRealEstateListByRentPrice" resultType="com.quiz.lesson03.model.RealEstate">
+ 		<select id="selectRealEstateListByRentPrice" resultType="com.quiz.lesson03.model.RealEstate">
  		SELECT 
  			`id`
 			,`realtorId` 
@@ -44,7 +44,7 @@
  	</select>
  	
  		<!-- parameterType : 2개 이상의 파라미터 가져온 경우 MAP으로 해주면 된다. -->
- 		<select id="setRealEstateListByAreaPrice" parameterType="map" resultType="com.quiz.lesson03.model.RealEstate">
+ 		<select id="selectRealEstateListByAreaPrice" parameterType="map" resultType="com.quiz.lesson03.model.RealEstate">
  		SELECT 
  			`id`
 			,`realtorId` 
@@ -92,6 +92,52 @@
  			, NOW()
  		)
  	</insert>
+ 	<!-- ###개는 무조건 쿼리오류<db>!!! -->
  	
+ 	<insert id="insertRealEstateAsField" parameterType="map">
+	 	INSERT INTO `real_estate`
+	 		(
+				`realtorId` 
+				,`address`
+				,`area`
+				,`type`
+				,`price`
+				,`rentPrice`
+				,`createdAt`
+				,`updatedAt`
+	 		)
+	 		
+	 		VALUES
+	 		(
+	 			#{realtorId}
+	 			, #{address}
+	 			, #{area}
+	 			, #{type}
+	 			, #{price}
+	 			, #{rentPrice}
+	 			, NOW()
+	 			, NOW()
+	 		)
+ 	</insert>
+ 	
+ 	<update id="updateRealEstateById" parameterType="map">
+ 		UPDATE `real_estate`
+ 		SET
+			`type` = #{type},
+			`price` = #{price},
+			`updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{id}
+ 		<!-- where절 안넣으면 모든행을 바꾼다. 꼭 넣어줘야 한다. -->
+ 	</update>
+ 	
+ 	
+ 	<delete id="deleteRealEstateById" parameterType="int">
+		DELETE
+		FROM 
+			`real_estate`
+		WHERE
+			`id` = #{id} 		
+ 	</delete>
  	
  </mapper>
