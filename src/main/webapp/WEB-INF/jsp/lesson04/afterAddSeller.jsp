@@ -24,6 +24,6 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="display-1">입력 성공!</div>
+	<div class="display-4">입력 성공!</div>
 </body>
 </html>

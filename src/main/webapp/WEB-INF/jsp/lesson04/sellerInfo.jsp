@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 <!-- bootstrap CDN link -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -25,7 +25,10 @@
 </head>
 <body>
 	<div class="container">
-		<div class="display-1">입력 성공!</div>
+		<h3>판매자 정보</h3>
+		<img src="${result.profileImageUrl}" alt="사진" width=100 height=100>
+		<h2>${result.nickname}</h2>
+		<div class="text-warning font-weight-bold">${result.temperature}</div>
 	</div>
 </body>
 </html>

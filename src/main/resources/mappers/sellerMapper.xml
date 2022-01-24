@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
  <mapper namespace="com.quiz.lesson04.dao.SellerDAO">
  	<insert id="insertSeller" parameterType="map">
  		INSERT INTO `seller`
@@ -12,6 +12,7 @@
 		`createdAt`,
 		`updatedAt`
  		)
+ 		
  		VALUES
  		(
  		#{nickname},
@@ -20,6 +21,33 @@
  		NOW(),
  		NOW()
  		)
- 	
  	</insert>
+ 	
+ 	<select id="selectSellerInfo" resultType="com.quiz.lesson04.model.Seller">
+ 		SELECT 
+	 		`id`,
+			`nickname`,
+			`profileImageUrl`,
+			`temperature`,
+			`createdAt`,
+			`updatedAt`
+ 		FROM
+ 			`seller`
+ 		ORDER BY `id` DESC
+ 		LIMIT 1
+ 	</select>
+ 	
+ 	 	<select id="selectSellerInfoById" resultType="com.quiz.lesson04.model.Seller">
+ 		SELECT 
+	 		`id`,
+			`nickname`,
+			`profileImageUrl`,
+			`temperature`,
+			`createdAt`,
+			`updatedAt`
+ 		FROM
+ 			`seller`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
  </mapper>
