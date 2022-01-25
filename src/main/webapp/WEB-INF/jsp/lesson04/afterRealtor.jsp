@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Insert title here</title>
 <!-- bootstrap CDN link -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -24,21 +24,6 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div class="container">
-		<h1>판매자 정보</h1>
-		<!-- EL 표현식 : 셀러객체.필드명 -->
-		<img src="${seller.profileImageUrl}" alt="사진" width=100 height=100>
-		<div class="display-3">${seller.nickname}</div>
-		<div class="display-4 text-warning font-weight-bold">${seller.temperature}</div>
-	</div>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-

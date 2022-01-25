@@ -13,9 +13,8 @@ public interface SellerDAO {
 			@Param("temperature") double temperature
 			);
 	
-	public Seller selectSellerInfo();
+	public Seller selectLastSeller();
 	
-	public Seller selectSellerInfoById(
-			@Param("id") int id
-			);
+	// 하나의 경우에는 @param 안해도 된다!!!
+	public Seller selectSellerById(int id);
 }

@@ -6,6 +6,7 @@
  	<insert id="insertSeller" parameterType="map">
  		INSERT INTO `seller`
  		(
+ 		<!-- ID는 안넣는다!!! -->
 		`nickname`,
 		`profileImageUrl`,
 		`temperature`,
@@ -23,7 +24,7 @@
  		)
  	</insert>
  	
- 	<select id="selectSellerInfo" resultType="com.quiz.lesson04.model.Seller">
+ 	<select id="selectLastSeller" resultType="com.quiz.lesson04.model.Seller">
  		SELECT 
 	 		`id`,
 			`nickname`,
@@ -37,7 +38,8 @@
  		LIMIT 1
  	</select>
  	
- 	 	<select id="selectSellerInfoById" resultType="com.quiz.lesson04.model.Seller">
+ 		<!-- parameterType은 한개라도 명시해주는게 보기에 좋다. -->
+ 	 	<select id="selectSellerById" parameterType="int" resultType="com.quiz.lesson04.model.Seller">
  		SELECT 
 	 		`id`,
 			`nickname`,
@@ -47,7 +49,9 @@
 			`updatedAt`
  		FROM
  			`seller`
+ 			<!-- id가 넘어왔기 때문에 where절 걸어줘야 한다. -->
  		WHERE
  			`id` = #{id}
  	</select>
+ 	
  </mapper>

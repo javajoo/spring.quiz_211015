@@ -14,14 +14,15 @@ public class SellerBO {
 	
 	public void addSeller(String nickname,String profileImageUrl,double temperature) {
 		sellerDAO.insertSeller(nickname, profileImageUrl, temperature);
+		// DAO로 넘어갈때 메서드 변수명까지 복사해서 작업하면 편리하다.
 	}
 	
-	public Seller getSellerInfo() {
-		return sellerDAO.selectSellerInfo();
+	public Seller getLastSeller() {
+		return sellerDAO.selectLastSeller();
 	}
 	
-	public Seller getSellerInfoById(int id) {
-		return sellerDAO.selectSellerInfoById(id);
+	public Seller getSellerById(int id) {
+		return sellerDAO.selectSellerById(id);
 	}
 	
 }

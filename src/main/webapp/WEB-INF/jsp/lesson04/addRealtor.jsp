@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,20 +25,30 @@
 </head>
 <body>
 	<div class="container">
-		<h1>판매자 정보</h1>
-		<!-- EL 표현식 : 셀러객체.필드명 -->
-		<img src="${seller.profileImageUrl}" alt="사진" width=100 height=100>
-		<div class="display-3">${seller.nickname}</div>
-		<div class="display-4 text-warning font-weight-bold">${seller.temperature}</div>
+		<h1>공인중개사 추가</h1>
+		<form method="post" action="/lesson04/quiz02/add_realtor">
+			<div class="form-group">
+				<label for="office"></label> <input type="text" class="form-control"
+					id="office" name="office">
+			</div>
+
+			<div class="form-group">
+				<label for="phoneNumber"></label> <input type="text" class="form-control"
+					id="phoneNumber" name="phoneNumber">
+			</div>
+
+			<div class="form-group">
+				<label for="address"></label> <input type="text" class="form-control"
+					id="address" name="address">
+			</div>
+
+			<div class="form-group">
+				<label for="grade"></label> <input type="text" class="form-control"
+					id="grade" name="grade">
+			</div>
+			
+			<input type="submit" class="btn btn-primary" value="추가">
+		</form>
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
