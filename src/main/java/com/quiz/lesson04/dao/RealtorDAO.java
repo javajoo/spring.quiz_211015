@@ -2,7 +2,12 @@ package com.quiz.lesson04.dao;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class RealtorDAO {
+import com.quiz.lesson04.model.Realtor;
 
+@Repository
+public interface RealtorDAO {
+
+	public void insertRealtor(Realtor realtor);
+	
+	public Realtor selectRealtorById(int id);
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>공인중개사 추가</title>
 <!-- bootstrap CDN link -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -28,26 +28,26 @@
 		<h1>공인중개사 추가</h1>
 		<form method="post" action="/lesson04/quiz02/add_realtor">
 			<div class="form-group">
-				<label for="office"></label> <input type="text" class="form-control"
-					id="office" name="office">
-			</div>
-
-			<div class="form-group">
-				<label for="phoneNumber"></label> <input type="text" class="form-control"
-					id="phoneNumber" name="phoneNumber">
-			</div>
-
-			<div class="form-group">
-				<label for="address"></label> <input type="text" class="form-control"
-					id="address" name="address">
-			</div>
-
-			<div class="form-group">
-				<label for="grade"></label> <input type="text" class="form-control"
-					id="grade" name="grade">
+				<label for="office">공인중개사</label>
+				<input type="text" class="form-control" id="office" name="office">
 			</div>
 			
-			<input type="submit" class="btn btn-primary" value="추가">
+			<div class="form-group">
+				<label for="phoneNumber">전화번호</label>
+				<input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+			</div>
+			
+			<div class="form-group">
+				<label for="address">주소</label>
+				<input type="text" class="form-control" id="address" name="address">
+			</div>
+			
+			<div class="form-group">
+				<label for="grade">등급</label>
+				<input type="text" class="form-control" id="grade" name="grade">
+			</div>
+			
+			<input type="submit" value="추가" class="btn btn-primary">
 		</form>
 	</div>
 </body>

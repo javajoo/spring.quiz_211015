@@ -24,6 +24,35 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-
+	<div class="container">
+		<h1>공인중개사 정보</h1>
+		<table class="table table-scriped">
+			<tr>
+				<th>ID</th>
+				<td>${result.id}</td>
+			</tr>
+			
+			<tr>
+				<th>상호명</th>
+				<td>${result.office}</td>
+			</tr>
+			
+			<tr>
+				<th>전화번호</th>
+				<td>${result.phoneNumber}</td>
+			</tr>
+			
+			<tr>
+				<th>주소</th>
+				<td>${result.address}</td>
+			</tr>
+			
+			<tr>
+				<th>등급</th>
+				<td>${result.grade}</td>
+			</tr>
+		</table>
+		
+	</div>
 </body>
 </html>
