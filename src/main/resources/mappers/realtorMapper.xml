@@ -2,8 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
+ <!-- 
+ ** mapper 아예 만들지 않거나 만들거면 mapper dao랑 연결까지 시켜줘야 한다.
+ mapper가 완성되지 않은 상태로 서버를 키면 에러가 뜬다. 
+ mapper에는 항상 namespace가 있어야 한다. (쿼리까지는 없더라도)
+  -->
+ 
+ 
  <mapper namespace="com.quiz.lesson04.dao.RealtorDAO">
-	 <insert id="insertRealtor" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+ 	 <!-- parameterType 객체 자체인 경우 객체 주소 가져온다. -->
+	 <insert id="insertRealtor" parameterType="com.quiz.lesson04.model.Realtor" 
+	 useGeneratedKeys="true" keyProperty="id">
+	 <!-- id가 controller로 자동으로 넘어간다. -->
 	 	INSERT INTO `realtor`
 	 	(
 			`office`
@@ -26,7 +36,9 @@
 	 		
 	 </insert>
 	 
-	 <select id="selectRealtorById" parameterType="map" resultType="com.quiz.lesson04.model.Realtor">
+	 
+	 <!-- 모든 필드를 가져온 다음에 필요한 것만 꺼내쓰는 겍 좋다. -->
+	 <select id="selectRealtorById" parameterType="int" resultType="com.quiz.lesson04.model.Realtor">
 	 	SELECT
 	 		`id`
 	 		,`office`
@@ -38,6 +50,10 @@
 	 	FROM
 	 		`realtor`
 	 	WHERE
-	 		`id` = #{id}
+	 		`id` = #{id} <!-- 따옴표가 붙는다. -->
+	 		<!--
+	 		 ${} 따옴표가 안들어가고 데이터 값만 들어간다. 
+	 		 ORDER BY ${} 오름차순 이거나 내림차순 둘중에 하나 사용할 때 
+	 		 -->
 	 </select>
  </mapper>

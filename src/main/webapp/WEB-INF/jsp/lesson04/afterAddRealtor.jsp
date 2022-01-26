@@ -26,30 +26,40 @@
 <body>
 	<div class="container">
 		<h1>공인중개사 정보</h1>
-		<table class="table table-scriped">
+		<table class="table table-striped">
 			<tr>
 				<th>ID</th>
-				<td>${result.id}</td>
+				<td>${realtor.id}</td>
 			</tr>
 			
 			<tr>
 				<th>상호명</th>
-				<td>${result.office}</td>
+				<td>${realtor.office}</td>
 			</tr>
 			
 			<tr>
 				<th>전화번호</th>
-				<td>${result.phoneNumber}</td>
+				<td>${realtor.phoneNumber}</td>
 			</tr>
 			
 			<tr>
 				<th>주소</th>
-				<td>${result.address}</td>
+				<td>${realtor.address}</td>
 			</tr>
 			
 			<tr>
 				<th>등급</th>
-				<td>${result.grade}</td>
+				<td>${realtor.grade}</td>
+			</tr>
+			
+			<tr>
+				<th>생성일</th>
+				<td>${realtor.createdAt}</td>
+			</tr>
+			
+			<tr>
+				<th>수정일</th>
+				<td>${realtor.updatedAt}</td>
 			</tr>
 		</table>
 		

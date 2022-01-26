@@ -28,7 +28,7 @@
 		<h1>공인중개사 추가</h1>
 		<form method="post" action="/lesson04/quiz02/add_realtor">
 			<div class="form-group">
-				<label for="office">공인중개사</label>
+				<label for="office">상호명</label>
 				<input type="text" class="form-control" id="office" name="office">
 			</div>
 			
