@@ -1,6 +1,7 @@
 package com.quiz.lesson05;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,17 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Controller 
 public class Lesson05Controller {
 
-	// http://localhost/lesson05/quiz01
+	//http://localhost/lesson05/quiz01
 	@RequestMapping("/lesson05/quiz01")
 	public String quiz01() {
 		return "lesson05/quiz01";
 	}
-
+	
 	// 한 페이지에 구성할 수 있다.
-	// http://localhost/lesson05/quiz02
+	//http://localhost/lesson05/quiz02
 	@RequestMapping("/lesson05/quiz02")
 	public String quiz02(Model model) {
 
@@ -32,6 +33,7 @@ public class Lesson05Controller {
 		musicRanking.add("보고싶다");
 
 		// 2. JSTL 응용하기
+
 		List<Map<String, Object>> membership = new ArrayList<>();
 
 		Map<String, Object> member = new HashMap<>();
@@ -75,5 +77,53 @@ public class Lesson05Controller {
 
 		return "lesson05/quiz02";
 	}
+	
+	//http://localhost/lesson05/quiz03
+	@RequestMapping("/lesson05/quiz03")
+	public String quiz03(Model model) {
+		
+		// 1. JSTL Formatter 숫자, 비율
+		
+		List<Integer> candidates = new ArrayList<>();
+		candidates.add(263001);
+		candidates.add(173942); 
+		candidates.add(563057); 
+		
+		// 2. JSTL Formatter 통화, 날짜
+		
+		List<Map<String, Object>> cardBills = new ArrayList<>();
 
+		Map<String, Object> cardBill = new HashMap<>();
+		cardBill.put("store", "GS48");
+		cardBill.put("pay", 7800);
+		cardBill.put("date", "2025-09-14");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "현태백화점");
+		cardBill.put("pay", 2750000);
+		cardBill.put("date", "2025-09-18");
+		cardBill.put("installment", "3개월");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "요촌치킨");
+		cardBill.put("pay", 180000);
+		cardBill.put("date", "2025-09-20");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+		
+		Date today = new Date();
+		
+		
+
+		model.addAttribute("candidates",candidates);
+		model.addAttribute("cardBills",cardBills);
+		model.addAttribute("today",today);
+		
+		return "lesson05/quiz03";
+	}
+	
+	
 }
