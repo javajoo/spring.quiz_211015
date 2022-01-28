@@ -68,8 +68,7 @@
 						<!-- 따옴표 중복되면 상충되기 때문에 안에 문자열은 ''로 넣어준다. -->
 							<c:choose>
 								<c:when test="${member.grade eq 'VIP'}">
-									<!-- 색깔 태그 넣을 때 span 태그에다가 준다. -->
-									<span class="text-danger">${member.grade}</span>
+									<!-- 색깔 태그 넣을 때 span 태그에다가 준다. -->i
 								</c:when>
 	
 								<c:when test="${member.grade eq 'GOLD'}">

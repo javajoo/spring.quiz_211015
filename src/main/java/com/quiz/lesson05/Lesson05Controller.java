@@ -89,6 +89,15 @@ public class Lesson05Controller {
 		candidates.add(173942); 
 		candidates.add(563057); 
 		
+		// 구할려고 하는 계산식이 들어가려면 bo에다가 해줘야 한다.
+		
+		int totalCount = 0;
+		for(Integer candidate : candidates) {
+			totalCount += candidate;
+		}
+		
+		
+		
 		// 2. JSTL Formatter 통화, 날짜
 		
 		List<Map<String, Object>> cardBills = new ArrayList<>();
@@ -114,16 +123,77 @@ public class Lesson05Controller {
 		cardBill.put("installment", "일시불");
 		cardBills.add(cardBill);
 		
-		Date today = new Date();
-		
-		
-
 		model.addAttribute("candidates",candidates);
+		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("cardBills",cardBills);
-		model.addAttribute("today",today);
 		
 		return "lesson05/quiz03";
 	}
-	
+	//http://localhost/lesson05/quiz04
+	@RequestMapping("/lesson05/quiz04")
+	public String quiz04(Model model) {
+		
+		
+		List<Member> members = new ArrayList<>();
+
+		Member member = new Member();
+		member.setName("유비");
+		member.setPhoneNumber("010-1234-5678");
+		member.setEmail("youbee@gmail.com");
+		member.setNationality("삼국시대 촉한");
+		member.setIntroduce("저는 촉의 군주 유비입니다. 삼국통일을 위해 열심히 일하겠습니다.");
+		members.add(member);
+
+		member = new Member();
+		member.setName("관우");
+		member.setPhoneNumber("010-1234-5678");
+		member.setEmail("woo@naver.com");
+		member.setNationality("삼국시대 촉한");
+		member.setIntroduce("관우에요. 저는 유비형님 보다 나이는 많지만 일단 아우입니다.");
+		members.add(member);
+
+		member = new Member();
+		member.setName("장비");
+		member.setPhoneNumber("02-111-3333");
+		member.setNationality("삼국시대 촉한");
+		member.setEmail("tools@gmail.com");
+		member.setIntroduce("장비라우");
+		members.add(member);
+
+		member = new Member();
+		member.setName("조조");
+		member.setPhoneNumber("010-0987-4321");
+		member.setNationality("삼국시대 위");
+		member.setEmail("jojo@gmail.com");
+		member.setIntroduce("이름은 조조 자는 맹덕이라 하오");
+		members.add(member);
+
+		member = new Member();
+		member.setName("주유");
+		member.setPhoneNumber("010-0000-1111");
+		member.setNationality("삼국시대 오");
+		member.setEmail("jooyou@kakao.com");
+		member.setIntroduce("주유는 주유소에서 ㅋㅋ");
+		members.add(member);
+
+		member = new Member();
+		member.setName("황충");
+		member.setPhoneNumber("031-432-0000");
+		member.setNationality("삼국시대 촉한");
+		member.setEmail("yellowbug@naver.com");
+		member.setIntroduce("내 수염 좀 멋있는 듯");
+		members.add(member);
+		
+		//이부분이랑 items 부분 잘 확인하기!!!
+		model.addAttribute("members",members);
+		
+		return "lesson05/quiz04";
+	}
+
+	//http://localhost/lesson05/quiz05
+	@RequestMapping("lesson05/quiz05")
+	public String quiz05() {
+		return "lesson05/quiz05";
+	}
 	
 }

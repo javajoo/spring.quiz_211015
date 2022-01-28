@@ -41,7 +41,8 @@
 					<tr>
 						<td>${status.count}</td>
 						<td><fmt:formatNumber value="${candidate}" type="number" /> </td>
-						<td><fmt:formatNumber value="${candidate / 1000000}" type="percent" /></td>
+						<td><fmt:formatNumber value="${candidate / totalCount}" type="percent" /></td>
+						<%-- value="${candidate / totalCount}"와 같은 결과가 나온다. --%>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -61,14 +62,20 @@
 				<c:forEach var="cardBill" items="${cardBills}">
 					<tr>
 						<td>${cardBill.store}</td>
-						<td><fmt:formatNumber value="${cardBill.pay}" type="currency" ></fmt:formatNumber></td>
-						<td>	
-							<fmt:formatDate value="${today}" pattern="yyyy년 MM월 dd일" var="pattern1" />
-						 ${pattern1}
-						
+						<td><fmt:formatNumber value="${cardBill.pay}" type="currency" /></td>
+						<td>
+							<fmt:parseDate value="${cardBill.date}" pattern="yyyy-MM-dd" var="date" />
+							<fmt:formatDate value="${date}" pattern="yyyy년 MM월 dd일" />
 						</td>
 						<td>${cardBill.installment}</td>
-						
+						<%--
+						스트링을 날짜로 바로 변환할 수 없다.
+						데이트 객체를 포맷으로 변환 후 내가 원하는 스트링으로 재변환 해줘야 한다.
+						fmt:formatDate 데이트가 된다 스트링 - > 데이트
+						pattern="yyyy-MM-dd" 에 스트링에 들어있는 패턴을 넣어줘야 한다
+						바로 출력안할거면 var 저장해놓고 출력할 때 변수 사용하면 된다.
+						바로 출력할거면 var 저장안하면 바로 출력이 된다.
+						 --%>
 					</tr>
 				</c:forEach>
 			</tbody>
