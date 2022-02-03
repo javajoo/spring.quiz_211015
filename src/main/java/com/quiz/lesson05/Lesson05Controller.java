@@ -1,26 +1,36 @@
 package com.quiz.lesson05;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller 
-public class Lesson05Controller {
+import com.quiz.lesson05.bo.WeatherhistoryBO;
+import com.quiz.lesson05.model.Weatherhistory;
 
-	//http://localhost/lesson05/quiz01
+@Controller
+public class Lesson05Controller {
+	
+	@Autowired
+	private WeatherhistoryBO weatherhistoryBO;
+	
+
+	// http://localhost/lesson05/quiz01
 	@RequestMapping("/lesson05/quiz01")
 	public String quiz01() {
 		return "lesson05/quiz01";
 	}
-	
+
 	// 한 페이지에 구성할 수 있다.
-	//http://localhost/lesson05/quiz02
+	// http://localhost/lesson05/quiz02
 	@RequestMapping("/lesson05/quiz02")
 	public String quiz02(Model model) {
 
@@ -77,29 +87,26 @@ public class Lesson05Controller {
 
 		return "lesson05/quiz02";
 	}
-	
-	//http://localhost/lesson05/quiz03
+
+	// http://localhost/lesson05/quiz03
 	@RequestMapping("/lesson05/quiz03")
 	public String quiz03(Model model) {
-		
+
 		// 1. JSTL Formatter 숫자, 비율
-		
+
 		List<Integer> candidates = new ArrayList<>();
 		candidates.add(263001);
-		candidates.add(173942); 
-		candidates.add(563057); 
-		
+		candidates.add(173942);
+		candidates.add(563057);
+
 		// 구할려고 하는 계산식이 들어가려면 bo에다가 해줘야 한다.
-		
 		int totalCount = 0;
-		for(Integer candidate : candidates) {
+		for (Integer candidate : candidates) {
 			totalCount += candidate;
 		}
-		
-		
-		
+
 		// 2. JSTL Formatter 통화, 날짜
-		
+
 		List<Map<String, Object>> cardBills = new ArrayList<>();
 
 		Map<String, Object> cardBill = new HashMap<>();
@@ -122,18 +129,19 @@ public class Lesson05Controller {
 		cardBill.put("date", "2025-09-20");
 		cardBill.put("installment", "일시불");
 		cardBills.add(cardBill);
-		
-		model.addAttribute("candidates",candidates);
-		model.addAttribute("totalCount",totalCount);
-		model.addAttribute("cardBills",cardBills);
-		
+
+		// 하단에 모아두는게 보기좋다.
+		model.addAttribute("candidates", candidates);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("cardBills", cardBills);
+
 		return "lesson05/quiz03";
+
 	}
+
 	//http://localhost/lesson05/quiz04
 	@RequestMapping("/lesson05/quiz04")
 	public String quiz04(Model model) {
-		
-		
 		List<Member> members = new ArrayList<>();
 
 		Member member = new Member();
@@ -183,17 +191,36 @@ public class Lesson05Controller {
 		member.setEmail("yellowbug@naver.com");
 		member.setIntroduce("내 수염 좀 멋있는 듯");
 		members.add(member);
-		
-		//이부분이랑 items 부분 잘 확인하기!!!
-		model.addAttribute("members",members);
-		
+
+		model.addAttribute("members", members);
+
 		return "lesson05/quiz04";
 	}
-
+	
 	//http://localhost/lesson05/quiz05
-	@RequestMapping("lesson05/quiz05")
+	@RequestMapping("/lesson05/quiz05")
 	public String quiz05() {
 		return "lesson05/quiz05";
 	}
 	
+	//http://localhost/lesson05/quiz05/info
+	@PostMapping("/lesson05/quiz05/info")
+	public String quiz05_info(
+			Model model,
+			@ModelAttribute Weatherhistory weatherhistory
+			) {
+		
+		
+		// insert db
+		weatherhistoryBO.addWeatherhistory(weatherhistory);
+
+		
+		// select db
+		weatherhistory = weatherhistoryBO.selectWeatherhistory(weatherhistory.getId());
+		
+		model.addAttribute("weatherhistory",weatherhistory);
+		
+		return "/lesson05/quiz05_1";
+	}
+
 }

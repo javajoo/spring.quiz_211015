@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.quiz.lesson05.dao.WeatherhistoryDAO">
+ 	<insert id="insertWeatherhistory" parameterType="com.quiz.lesson05.model.Weatherhistory"
+ 	keyProperty="id" useGeneratedKeys="true">
+ 		INSERT INTO `weatherhistory`
+ 		(
+	 		`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{date}
+ 			,#{weather}
+ 			,#{temperatures}
+ 			,#{precipitation}
+ 			,#{microDust}
+ 			,#{windSpeed}
+ 			,NOW()
+ 			,NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectWeatherhistory" parameterType="int" resultType="com.quiz.lesson05.model.Weatherhistory">
+ 		SELECT 
+ 			`id`
+ 			,`date`
+			,`weather`
+			,`temperatures`
+			,`precipitation`
+			,`microDust`
+			,`windSpeed`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`weatherhistory`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
+ </mapper>
