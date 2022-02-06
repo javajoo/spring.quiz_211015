@@ -68,7 +68,7 @@ footer {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="weather" items="${weatherhistory}">
+					<%-- <c:forEach var="weather" items="${weatherhistory}"> --%>
 							<tr>
 								<td>
 									<fmt:parseDate value="${weather.date}" pattern="yyyy-MM-dd" var="date" />
@@ -82,7 +82,7 @@ footer {
 								<td>${weather.microDust}</td>
 								<td>${weather.windSpeed}km/h</td>
 							</tr>
-						</c:forEach>
+						<%--  </c:forEach> --%>
 					</tbody>
 				</table>
 
