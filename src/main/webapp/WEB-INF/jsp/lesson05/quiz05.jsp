@@ -55,7 +55,7 @@ footer {
 				<div class="mt-3 ml-3">
 					<h3>날씨 입력</h3>
 				</div>
-				<form method="post" action="/lesson05/quiz05/info">
+				<form method="post" action="/lesson05/quiz05/add">
 					<div class="d-flex mt-5 mb-5 d-flex justify-content-between">
 						<div class="d-flex">
 							<label for="date">날짜</label>
@@ -142,6 +142,15 @@ footer {
 			</div>
 		</footer>
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$('#date').datepicker({
+				dateFormat: 'yy-mm-dd' // 2022-02-07
+			});
+			
+		});
+	</script>
 	
 </body>
 </html>

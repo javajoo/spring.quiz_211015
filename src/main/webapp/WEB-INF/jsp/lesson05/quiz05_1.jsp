@@ -68,21 +68,37 @@ footer {
 						</tr>
 					</thead>
 					<tbody>
-					<%-- <c:forEach var="weather" items="${weatherhistory}"> --%>
+					<c:forEach var="item" items="${weatherhistotyList}">
 							<tr>
 								<td>
-									<fmt:parseDate value="${weather.date}" pattern="yyyy-MM-dd" var="date" />
-									<fmt:formatDate value="${date}" pattern="yyyy년MM월dd일" />
+								<fmt:formatDate value="${item.date}" pattern="yyyy년M월d일" />
 								</td>
 								<td>
-									<img src="${weather.weather}" alt="사진">
+								<c:choose>
+									<c:when test="${item.weather == '맑음'}">
+										<img src="/images/sunny.jpg" alt="날씨">
+									</c:when>
+									
+									<c:when test="${item.weather == '구름조금'}">
+										<img src="/images/partlyCloudy.jpg" alt="날씨">
+									</c:when>
+									
+									<c:when test="${item.weather == '흐림'}">
+										<img src="/images/cloudy.jpg" alt="날씨">
+									</c:when>
+									
+									<c:when test="${item.weather == '비'}">
+										<img src="/images/rainy.jpg" alt="날씨">
+									</c:when>
+									
+								</c:choose>
 								</td>
-								<td>${weather.temperatures}˚C</td>
-								<td>${weather.precipitation}mm</td>
-								<td>${weather.microDust}</td>
-								<td>${weather.windSpeed}km/h</td>
+								<td>${item.temperatures}˚C</td>
+								<td>${item.precipitation}mm</td>
+								<td>${item.microDust}</td>
+								<td>${item.windSpeed}km/h</td>
 							</tr>
-						<%--  </c:forEach> --%>
+							</c:forEach>
 					</tbody>
 				</table>
 

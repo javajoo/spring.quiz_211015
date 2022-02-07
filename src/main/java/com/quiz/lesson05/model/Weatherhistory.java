@@ -7,8 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Weatherhistory {
 
 	private int id;
-//	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	// 스트링은 date로 바꿀 수 없다. 넘어오는 패턴을 똑같이 설정해준다.
+	// moedel 에서랑 나머지 class에서랑 다르게 설정해야한다!!!
 	private Date date;
 	private String weather;
 	private double temperatures;
@@ -89,6 +90,5 @@ public class Weatherhistory {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
 
 }

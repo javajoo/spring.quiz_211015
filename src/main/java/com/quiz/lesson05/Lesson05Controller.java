@@ -8,9 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.lesson05.bo.WeatherhistoryBO;
 import com.quiz.lesson05.model.Weatherhistory;
@@ -196,31 +196,53 @@ public class Lesson05Controller {
 		return "lesson05/quiz04";
 	}
 	
+	// request -> 서버(식당) -> response
+	
+	// 날씨 정보 목록 화면
 	//http://localhost/lesson05/quiz05
 	@RequestMapping("/lesson05/quiz05")
-	public String quiz05() {
-		return "lesson05/quiz05";
+	public String quiz05(Model model) {
+		
+		List<Weatherhistory> weatherhistotyList = weatherhistoryBO.getWeatherhistoryList();
+		
+		model.addAttribute("weatherhistotyList",weatherhistotyList);
+		return "lesson05/quiz05_1";
 	}
 	
+	// 날씨 정보 입력 화면 
 	//http://localhost/lesson05/quiz05/info
-	@PostMapping("/lesson05/quiz05/info")
+	@RequestMapping("/lesson05/quiz05/info")
 	public String quiz05_info(
-			Model model,
-			@ModelAttribute Weatherhistory weatherhistory
-		
 			) {
 		
-		
-		// insert db
-		weatherhistoryBO.addWeatherhistory(weatherhistory);
-
-		
-		// select db
-		weatherhistory = weatherhistoryBO.selectWeatherhistory(weatherhistory.getId());
-		
-		model.addAttribute("weatherhistory",weatherhistory);
-		
-		return "/lesson05/quiz05_1";
+		return "/lesson05/quiz05";
 	}
+	
+	// 날씨 입력 -> 결과 : 날씨 정보 목록 화면으로 리다이렉트
+	
+	@PostMapping("/lesson05/quiz05/add")
+	public String addWeatherHistory(
+			@RequestParam("date") String date,
+			@RequestParam("weather") String weather,
+			@RequestParam("microDust") String microDust,
+			@RequestParam("temperatures") double temperatures,
+			@RequestParam("precipitation") double precipitation,
+			@RequestParam("windSpeed") double windSpeed
+			//HttpServletResponse response 
+			// redirect
+			
+			) {
+		
+		// DB insert
+		
+		weatherhistoryBO.addWeatherhistory(date, weather, microDust, temperatures, precipitation, windSpeed);
+		
+		// 날씨 정보 목록 화면으로 리다이렉트
+		//response.sendRedirect("/lesson05/quiz05");
+		return "redirect:/lesson05/quiz05";
+		// 파라미터 잘 들어가는지 브레이크 포인트 걸어서 확인 해본다.
+		// 여기서 에러나면 들어오지도 못한 거다..
+	}
+	
 
 }
