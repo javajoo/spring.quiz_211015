@@ -43,7 +43,7 @@ public class Lesson06Controller {
 		List<Favorite> favorite = favoriteBO.getFavoriteList();
 		
 		model.addAttribute("favorite",favorite);
-		return "lesson06/afterFavorite";
+		return "성공";
 	}
 	
 }

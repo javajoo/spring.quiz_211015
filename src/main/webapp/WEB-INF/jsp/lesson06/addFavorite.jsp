@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>즐겨  찾기 추가하기</title>
+<!-- ajax 통신을 사용하려면 가장 기본적인 제이쿼리 cdn 가져와야 한다. -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -22,20 +26,20 @@
 <body>
 	<div class="container">
 		<h1>즐겨 찾기 추가하기</h1>
-		<div class="form-group">
-			<label for="name">제목</label>
-			<input type="text" class="form-control" id="name" name="name">
-		</div>
-		
-		<div class="form-group">
-			<label for="url">주소</label>
-			<input type="text" class="form-control" id="url" name="url">
-		</div>
-		<button type="button" class="btn btn-success form-control" id="addBtn">추가</button>
+			<div class="form-group">
+				<label for="name">제목</label>
+				<input type="text" class="form-control" id="name" name="name">
+			</div>
+			
+			<div class="form-group">
+				<label for="url">주소</label>
+				<input type="text" class="form-control" id="url" name="url">
+			</div>
+			<button type="button" class="btn btn-success form-control" id="addBtn">추가</button>
 	</div>
 </body>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {	
 		$('#addBtn').on('click',function(e){
 			let name = $('#name').val().trim();
 			if(name.length < 1) {
@@ -52,10 +56,11 @@
 		
 		$.ajax({
 			type: 'post'
-			, url: '/lesson05/addFavorite'
+			, url: '/lesson06/addFavorite'
 			, date: {'name':name, 'url':url}
 			, success: function(data) {
 				alert(data);
+				location.href = '/lesson06/afterFavorite';
 			}
 			, error: function(e) {
 				alert("error: " + e)

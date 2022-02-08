@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,11 +37,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items=""  var="" varStatus="status">
+				<c:forEach items="${favorite}"  var="favorite" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
-					<td>${.name}</td>
-					<td>${.url}</td>
+					<td>${favorite.name}</td>
+					<td>${favorite.url}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
