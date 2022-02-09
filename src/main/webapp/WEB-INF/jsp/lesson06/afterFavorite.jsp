@@ -7,10 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>즐겨찾기 목록</title>
-<!-- ajax 통신을 사용하려면 가장 기본적인 제이쿼리 cdn 가져와야 한다. -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -37,11 +33,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${favorite}"  var="favorite" varStatus="status">
+				<c:forEach items="${favoriteList}"  var="favoriteList" >
 				<tr>
-					<td>${status.count}</td>
-					<td>${favorite.name}</td>
-					<td>${favorite.url}</td>
+					<td>${favoriteList.id}</td>
+					<td>${favoriteList.name}</td>
+					<td>${favoriteList.url}</td>
 				</tr>
 				</c:forEach>
 			</tbody>

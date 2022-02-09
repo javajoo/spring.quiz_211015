@@ -14,7 +14,7 @@
  	VALUES
  	(
 		#{name}		
-		,#{name}	
+		,#{url}	
 		,NOW()	
 		,NOW()	
  	)

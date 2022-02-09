@@ -26,18 +26,19 @@
 <body>
 	<div class="container">
 		<h1>즐겨 찾기 추가하기</h1>
-		<form method="post" action="/lesson06/add_Favorite">
+		<!-- ajax 사용할거면 위쪽에 form 태그 안만들어도 된다!! -->
+		<!-- form 태그에서만 submit 버튼을 쓴다. -->
+		<!-- name속성도 필요가 없다!!! -->
 			<div class="form-group">
 				<label for="name">제목</label>
-				<input type="text" class="form-control" id="name" name="name">
+				<input type="text" class="form-control" id="name" >
 			</div>
 			
 			<div class="form-group">
 				<label for="url">주소</label>
-				<input type="text" class="form-control" id="url" name="url">
+				<input type="text" class="form-control" id="url" >
 			</div>
 			<button type="button" class="btn btn-success form-control" id="addBtn">추가</button>
-			</form>
 	</div>
 	
 	<script>
@@ -55,21 +56,30 @@
 				return;
 			}
 		
+			// http도 아니고 https도 아닐 때 => 얼럿을 띄워야 함 (and)
+			if (url.startsWith('http') == false && url.startsWith('https') == false) {
+				alert("주소 형식이 잘못되었습니다.");
+				return;
+			}
 		
-		
+		// 서버 호출
 		$.ajax({
+			/* "" 큰따옴표로 해주는 게 좋다! */
 			type: "post"
 			, url: "/lesson06/add_favorite"
 			, data: {"name":name, "url":url}
 			, success: function(data) {
-				alert(data);
-				location.href = "/lesson06/get_favorite";
+				//alert(data.result);
+				if (data.result == "success") {
+					// 성공한게 맞으면 목록 화면으로 이동
+					location.href = "/lesson06/get_favorite";
+				} 
 			}
 			, error: function(e) {
 				alert("error: " + e)
 			}
 		});
-		});
+	  });
 	});
 </script>
 </body>

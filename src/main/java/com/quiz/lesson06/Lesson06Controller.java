@@ -1,6 +1,8 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,18 +21,20 @@ public class Lesson06Controller {
 	@Autowired
 	private FavoriteBO favoriteBO;
 
-	// 유저 추가 화면 (뷰만)
+	// 즐겨찾기 추가 화면 (뷰만)
 	// http://localhost/lesson06/add_favorite_view
 	@RequestMapping("/lesson06/add_favorite_view")
-	public String addFavorite() {
+	public String addFavoriteView() {
 		return "lesson06/addFavorite";
 	}
 
-	// 유저 추가 기능
+	
+	// 여기서는 즐겨찾기 목록 만들 수 없기에 새로운 메서드 만들어줘야 한다.
+	// 즐겨찾기 추가 기능 - AJAX 호출로 들어오는 요청 (String으로 반드시 data값을 리턴해줘야 한다)
 	// http://localhost/lesson06/add_favorite
 	@ResponseBody
 	@PostMapping("/lesson06/add_favorite")
-	public String addFavorite(
+	public Map<String, String> addFavorite(
 			@RequestParam("name") String name,
 			@RequestParam("url") String url
 			
@@ -39,19 +43,23 @@ public class Lesson06Controller {
 		// insert db
 		favoriteBO.addFavorite(name, url);
 		
-		return "성공";
+		// return map -> return json String
+		Map<String,String> result = new HashMap<>();
+		result.put("result","success");
+		result.put("code", "1");
+		
+		return result;
 	}
 
-	// 유저 목록 화면
+	// 즐겨찾기 목록 화면
 	// http://localhost/lesson06/get_favorite
 	@RequestMapping("/lesson06/get_favorite")
 	public String getFavorite(
 			Model model) {
 		
 		// select db
-		List<Favorite> favorite = favoriteBO.getFavoriteList();
-
-		model.addAttribute("favorite", favorite);
+		List<Favorite> favoriteList = favoriteBO.getFavoriteList();
+		model.addAttribute("favoriteList", favoriteList);
 		return "lesson06/afterFavorite";
 	}
 
