@@ -59,11 +59,11 @@
 		
 		$.ajax({
 			type: "post"
-			, url: "/lesson06/add_Favorite"
+			, url: "/lesson06/add_favorite"
 			, data: {"name":name, "url":url}
 			, success: function(data) {
 				alert(data);
-				location.href = "/lesson06/get_Favorite";
+				location.href = "/lesson06/get_favorite";
 			}
 			, error: function(e) {
 				alert("error: " + e)
