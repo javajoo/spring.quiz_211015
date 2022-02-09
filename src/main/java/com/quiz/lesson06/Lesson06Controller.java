@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.quiz.lesson06.bo.FavoriteBO;
 import com.quiz.lesson06.model.Favorite;
@@ -22,7 +23,7 @@ public class Lesson06Controller {
 	private FavoriteBO favoriteBO;
 
 	// 즐겨찾기 추가 화면 (뷰만)
-	// http://localhost/lesson06/add_favorite_view
+	//http://localhost/lesson06/add_favorite_view
 	@RequestMapping("/lesson06/add_favorite_view")
 	public String addFavoriteView() {
 		return "lesson06/addFavorite";
@@ -31,7 +32,7 @@ public class Lesson06Controller {
 	
 	// 여기서는 즐겨찾기 목록 만들 수 없기에 새로운 메서드 만들어줘야 한다.
 	// 즐겨찾기 추가 기능 - AJAX 호출로 들어오는 요청 (String으로 반드시 data값을 리턴해줘야 한다)
-	// http://localhost/lesson06/add_favorite
+	//http://localhost/lesson06/add_favorite
 	@ResponseBody
 	@PostMapping("/lesson06/add_favorite")
 	public Map<String, String> addFavorite(
@@ -52,7 +53,7 @@ public class Lesson06Controller {
 	}
 
 	// 즐겨찾기 목록 화면
-	// http://localhost/lesson06/get_favorite
+	//http://localhost/lesson06/get_favorite
 	@RequestMapping("/lesson06/get_favorite")
 	public String getFavorite(
 			Model model) {
@@ -61,6 +62,30 @@ public class Lesson06Controller {
 		List<Favorite> favoriteList = favoriteBO.getFavoriteList();
 		model.addAttribute("favoriteList", favoriteList);
 		return "lesson06/afterFavorite";
+	}
+	
+	@RequestMapping("/lesson06/is_duplication")
+	@ResponseBody
+	public Map<String,Boolean> isDuplication(
+			@RequestParam("url") String url) {
+		
+		// 중복 확인 DB
+		boolean existFavorite = favoriteBO.existFavoriteByUrl(url);
+		
+		//Map 구성 후 리턴
+		Map<String,Boolean> result = new HashMap<>();
+		result.put("is_duplication", existFavorite);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/lesson06/delete_favorite")
+	public String deleteFavorite(
+			@RequestParam("id") int id) {
+		
+		favoriteBO.deleteFavoriteById(id);
+		return "삭제완료";
 	}
 
 }

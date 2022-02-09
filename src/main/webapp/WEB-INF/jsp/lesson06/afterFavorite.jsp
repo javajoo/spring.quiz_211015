@@ -30,6 +30,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,10 +39,31 @@
 					<td>${favoriteList.id}</td>
 					<td>${favoriteList.name}</td>
 					<td>${favoriteList.url}</td>
+					<td><button type="button" class="btn btn-danger" id="deleteBtn">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		$(document).ready(function(e){
+			$('#deleteBtn').on('click',function(e){
+			
+				
+				$.ajax({
+					type: "GET"
+					,url: "/lesson06/delete_favorite"
+					,data: 
+					,success(data): function(e){
+						
+					}
+					,error: function(e) {
+						alert("error");
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>

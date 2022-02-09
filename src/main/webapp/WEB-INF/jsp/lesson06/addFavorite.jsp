@@ -36,7 +36,11 @@
 			
 			<div class="form-group">
 				<label for="url">주소</label>
-				<input type="text" class="form-control" id="url" >
+				<div class="d-flex">
+					<input type="text" class="form-control col-10 mr-3" id="url" >
+					<input type="button" id="nameCheckBtn" class="form-control btn-info" value="중복확인">
+				</div>
+				<div id="nameStatusArea"></div>
 			</div>
 			<button type="button" class="btn btn-success form-control" id="addBtn">추가</button>
 	</div>
@@ -80,6 +84,43 @@
 			}
 		});
 	  });
+		
+		
+		// 중복 확인 버튼
+		
+		$('#nameCheckBtn').on('click',function(e) {
+			
+			//alert("click");
+			var url = $('#url').val().trim();
+			
+			$('#nameStatusArea').empty();
+			
+			
+			$.ajax({
+				type:"GET"
+				,url:"/lesson06/is_duplication"
+				,data: {"url":url}
+				,success: function(data) {
+					if (data.is_duplication == true) {
+						$('#nameStatusArea').append('<span class="text-danger">중복된 url 입니다.</span>')
+					} else {
+						$('#nameStatusArea').append('<span class="text-danger">저장 가능한 url 입니다.</span>');
+					}
+				}
+				,errer: function(e) {
+					alert("error");
+				}
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+		});
+			
 	});
 </script>
 </body>

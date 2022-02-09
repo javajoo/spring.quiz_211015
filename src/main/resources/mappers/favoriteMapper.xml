@@ -31,4 +31,21 @@
  		FROM
  			`favorite`
  	</select>
+ 	
+ 	<select id="existFavoriteByUrl" parameterType="String" resultType="boolean">
+ 		SELECT
+ 			count(*)
+ 		FROM
+ 			`favorite`
+ 		WHERE
+ 			`url` = #{url}
+ 	</select>
+ 	
+ 	<delete id="deleteFavoriteById" parameterType="int">
+ 		DELETE
+ 		FROM 
+ 			`favorite`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  </mapper>
