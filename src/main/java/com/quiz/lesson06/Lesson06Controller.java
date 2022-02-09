@@ -20,17 +20,19 @@ public class Lesson06Controller {
 	private FavoriteBO favoriteBO;
 	
 	// 유저 추가 화면 (뷰만)
-	//http://localhost/lesson06/addFavorite
-	@RequestMapping("/lesson06/addFavorite")
+	//http://localhost/lesson06/add_Favorite_view
+	@RequestMapping("/lesson06/add_Favorite_view")
 	public String addFavorite() {
 		return "lesson06/addFavorite";
 	}
 	
+
+	
 	// 유저 추가 기능 
-	//http://localhost/lesson06/infoFavorite
+	//http://localhost/lesson06/add_Favorite
 	@ResponseBody
-	@PostMapping("/lesson06/infoFavorite")
-	public String infoFavorite(
+	@PostMapping("/lesson06/add_Favorite")
+	public String addFavorite(
 			@RequestParam("name") String name,
 			@RequestParam("url") String url,
 			Model model
@@ -38,12 +40,23 @@ public class Lesson06Controller {
 		
 		// insert db
 		favoriteBO.addFavorite(name, url);
-		
+	
 		// select db
 		List<Favorite> favorite = favoriteBO.getFavoriteList();
 		
 		model.addAttribute("favorite",favorite);
+		
+		
 		return "성공";
+	}
+	
+	// 유저 목록 화면
+	//http://localhost/lesson06/get_Favorite
+	@RequestMapping("/lesson06/get_Favorite")
+	public String getFavorite(	
+			) {
+	
+		return "lesson06/afterFavorite";
 	}
 	
 }

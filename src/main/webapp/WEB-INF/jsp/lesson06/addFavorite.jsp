@@ -26,6 +26,7 @@
 <body>
 	<div class="container">
 		<h1>즐겨 찾기 추가하기</h1>
+		<form method="post" action="/lesson06/add_Favorite">
 			<div class="form-group">
 				<label for="name">제목</label>
 				<input type="text" class="form-control" id="name" name="name">
@@ -36,36 +37,40 @@
 				<input type="text" class="form-control" id="url" name="url">
 			</div>
 			<button type="button" class="btn btn-success form-control" id="addBtn">추가</button>
+			</form>
 	</div>
-</body>
-<script>
+	
+	<script>
 	$(document).ready(function() {	
 		$('#addBtn').on('click',function(e){
-			let name = $('#name').val().trim();
+			var name = $('#name').val().trim();
 			if(name.length < 1) {
 				alert("이름을 입력 해주세요")
 				return;
 			}
 			
-			let url = $('#url').val().trim();
+			var url = $('#url').val().trim();
 			if(url == '') {
 				alert("url을 입력 해주세요")
 				return;
 			}
-		});
+		
+		
 		
 		$.ajax({
-			type: 'post'
-			, url: '/lesson06/addFavorite'
-			, date: {'name':name, 'url':url}
+			type: "post"
+			, url: "/lesson06/add_Favorite"
+			, data: {"name":name, "url":url}
 			, success: function(data) {
 				alert(data);
-				location.href = '/lesson06/afterFavorite';
+				location.href = "/lesson06/get_Favorite";
 			}
 			, error: function(e) {
 				alert("error: " + e)
 			}
 		});
+		});
 	});
 </script>
+</body>
 </html>
