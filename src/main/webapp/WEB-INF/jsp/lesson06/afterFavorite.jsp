@@ -43,7 +43,7 @@
 					<td>${favoriteList.id}</td>
 					<td>${favoriteList.name}</td>
 					<td>${favoriteList.url}</td>
-					<td><button type="button" class="deleteBtn btn btn-danger" >삭제</button></td>
+					<td><button type="button" class="deleteBtn btn btn-danger" value="${favoriteList.id}">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -53,14 +53,12 @@
 	<script>
 		$(document).ready(function(e){
 			$('.deleteBtn').on('click',function(e){
-				//alert("click");
-				
 				 $.ajax({
 					type: "POST"
 					,url: "/lesson06/delete_favorite"
+					 , data: {id:$('.deleteBtn').attr('value')}
 					,success: function(data){
 						alert(data);
-						$('.deleteBtn').parent().parent().remove();
 						location.href="/lesson06/get_favorite"
 					}
 					,error: function(e) {
