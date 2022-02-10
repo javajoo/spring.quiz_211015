@@ -54,14 +54,13 @@
 		$(document).ready(function(e){
 			$('.deleteBtn').on('click',function(e){
 				//alert("click");
-				 $('.deleteBtn').parent().parent().remove();
-				
 				
 				 $.ajax({
 					type: "POST"
 					,url: "/lesson06/delete_favorite"
 					,success: function(data){
-					
+						alert(data);
+						$('.deleteBtn').parent().parent().remove();
 						location.href="/lesson06/get_favorite"
 					}
 					,error: function(e) {

@@ -31,7 +31,7 @@ public class FavoriteBO {
 	}
 	
 	
-	public void deleteFavoriteById() {
-		favoriteDAO.deleteFavoriteById();
+	public void deleteFavoriteById(int id) {
+		favoriteDAO.deleteFavoriteById(id);
 	}
 }
