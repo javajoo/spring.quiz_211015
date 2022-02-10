@@ -215,7 +215,7 @@ public class Lesson05Controller {
 	public String quiz05_info(
 			) {
 		
-		return "/lesson05/quiz05";
+		return "lesson05/quiz05";
 	}
 	
 	// 날씨 입력 -> 결과 : 날씨 정보 목록 화면으로 리다이렉트
