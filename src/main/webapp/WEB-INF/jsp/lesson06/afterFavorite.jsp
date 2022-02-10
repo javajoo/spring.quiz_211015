@@ -53,6 +53,8 @@
 	<script>
 		$(document).ready(function(e){
 			$('.deleteBtn').on('click',function(e){
+				
+				
 				 $.ajax({
 					type: "POST"
 					,url: "/lesson06/delete_favorite"

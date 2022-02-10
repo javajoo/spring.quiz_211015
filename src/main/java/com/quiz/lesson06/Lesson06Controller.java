@@ -92,7 +92,7 @@ public class Lesson06Controller {
 	@ResponseBody
 	@PostMapping("/lesson06/delete_favorite")
 	public String deleteFavorite(
-			@RequestParam(value="id", defaultValue = "3") int id) {
+			@RequestParam(value="id") int id) {
 		
 		favoriteBO.deleteFavoriteById(id);
 		return "삭제완료";
