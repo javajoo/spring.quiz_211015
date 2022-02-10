@@ -58,7 +58,9 @@
 				 $.ajax({
 					type: "POST"
 					,url: "/lesson06/delete_favorite"
-					 , data: {id:$('.deleteBtn').attr('value')}
+					/* $('.deleteBtn').attr('value')로 값 꺼내면 첫번째 버튼에 대한 value가 삭제,
+					$(this)로 셀렉터 잡아주면 원하는 행 삭제할 수 있다.*/
+					 , data: {id:$(this).attr('value')}
 					,success: function(data){
 						alert(data);
 						location.href="/lesson06/get_favorite"
