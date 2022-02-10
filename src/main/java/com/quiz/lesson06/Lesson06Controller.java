@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,27 +65,35 @@ public class Lesson06Controller {
 		return "lesson06/afterFavorite";
 	}
 	
-	@RequestMapping("/lesson06/is_duplication")
+	// 주소 중복 확인 - AJAX 호출로 들어오는 요청(String)
+	@PostMapping("/lesson06/is_duplication")
 	@ResponseBody
 	public Map<String,Boolean> isDuplication(
 			@RequestParam("url") String url) {
 		
 		// 중복 확인 DB
-		boolean existFavorite = favoriteBO.existFavoriteByUrl(url);
+		//boolean existFavorite = favoriteBO.existFavoriteByUrl(url);
+		Favorite favorite = favoriteBO.getFavoriteByUrl(url);
 		
 		//Map 구성 후 리턴
 		Map<String,Boolean> result = new HashMap<>();
-		result.put("is_duplication", existFavorite);
+		//result.put("is_duplication", existFavorite);
+		
+		result.put("result",true);
+		
+		if (favorite == null) {
+			// 중복되지 않음
+			result.put("result",false);
+		}
 		
 		return result;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/lesson06/delete_favorite")
-	public String deleteFavorite(
-			@RequestParam("id") int id) {
+	@PostMapping("/lesson06/delete_favorite")
+	public String deleteFavorite() {
 		
-		favoriteBO.deleteFavoriteById(id);
+		favoriteBO.deleteFavoriteById();
 		return "삭제완료";
 	}
 

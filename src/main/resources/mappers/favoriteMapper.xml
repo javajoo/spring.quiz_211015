@@ -32,20 +32,32 @@
  			`favorite`
  	</select>
  	
- 	<select id="existFavoriteByUrl" parameterType="String" resultType="boolean">
+ <!-- 	<select id="existFavoriteByUrl" parameterType="String" resultType="boolean">
  		SELECT
  			count(*)
  		FROM
  			`favorite`
  		WHERE
  			`url` = #{url}
+ 	</select> -->
+ 	
+ 	<select id="selectFavoriteByUrl" parameterType="String" resultType="com.quiz.lesson06.model.Favorite">
+ 		SELECT
+ 			`id`
+			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+ 		FROM
+ 			`favorite`
+ 		WHERE
+ 			`url` = #{url}
  	</select>
  	
- 	<delete id="deleteFavoriteById" parameterType="int">
+ 	
+ 	<delete id="deleteFavoriteById">
  		DELETE
  		FROM 
  			`favorite`
- 		WHERE
- 			`id` = #{id}
  	</delete>
  </mapper>

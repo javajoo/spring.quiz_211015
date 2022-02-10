@@ -40,13 +40,22 @@
 					<input type="text" class="form-control col-10 mr-3" id="url" >
 					<input type="button" id="nameCheckBtn" class="form-control btn-info" value="중복확인">
 				</div>
+				<!-- 1번째 방법 -->
 				<div id="nameStatusArea"></div>
+				
+				<!-- 2번째 방법 -->
+				<!-- 중복인 경우 나타내고 아닌 경우 숨긴다. -->
+				<span id="isDuplicationText" class="text-danger d-none">중복된 url 입니다.</span>
+				<span id="availableText" class="text-success">저장가능한 url 입니다.</span>
 			</div>
 			<button type="button" class="btn btn-success form-control" id="addBtn">추가</button>
+			<!-- button 타입 안정해놓으면 form태그로 인식한다! -->
 	</div>
 	
 	<script>
 	$(document).ready(function() {	
+		
+		// 즐겨찾기 추가 버튼
 		$('#addBtn').on('click',function(e){
 			var name = $('#name').val().trim();
 			if(name.length < 1) {
@@ -65,6 +74,14 @@
 				alert("주소 형식이 잘못되었습니다.");
 				return;
 			}
+			
+			// quiz02 - 중복확인 체크 
+			if ($('#availableText').hasClass("d-none")) {
+				// 저장 가능 url 문구가 없으면 검사를 다시 해야한다.
+				alert("다시 중복 확인을 해주세요");
+				return;
+			}
+			
 		
 		// 서버 호출
 		$.ajax({
@@ -93,30 +110,36 @@
 			//alert("click");
 			var url = $('#url').val().trim();
 			
+			if (url == '') {
+				alert("검사할 url을 입력 해주세요");
+				return;
+			}
 			$('#nameStatusArea').empty();
 			
 			
 			$.ajax({
-				type:"GET"
+				type:"POST"
 				,url:"/lesson06/is_duplication"
 				,data: {"url":url}
 				,success: function(data) {
-					if (data.is_duplication == true) {
+					
+					if (data.is_duplication == true) { 
+						// 중복일 때
 						$('#nameStatusArea').append('<span class="text-danger">중복된 url 입니다.</span>')
-					} else {
-						$('#nameStatusArea').append('<span class="text-danger">저장 가능한 url 입니다.</span>');
+						//$('#isDuplicationText').removeClass("d-none");
+						//$('#availableText').addClass("d-none");
+						
+					} else { 	
+						// 중복이 아닐 때
+						$('#nameStatusArea').append('<span class="text-success">저장 가능한 url 입니다.</span>');
+						//$('#availableText').removeClass("d-none");
+						//$('#isDuplicationText').addClass("d-none");
 					}
 				}
 				,errer: function(e) {
 					alert("error");
 				}
 			});
-			
-			
-			
-			
-			
-			
 			
 			
 		});

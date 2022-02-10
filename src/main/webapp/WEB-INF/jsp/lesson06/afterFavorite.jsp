@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>즐겨찾기 목록</title>
+<!-- ajax 통신을 사용하려면 가장 기본적인 제이쿼리 cdn 가져와야 한다. -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -39,7 +43,7 @@
 					<td>${favoriteList.id}</td>
 					<td>${favoriteList.name}</td>
 					<td>${favoriteList.url}</td>
-					<td><button type="button" class="btn btn-danger" id="deleteBtn">삭제</button></td>
+					<td><button type="button" class="deleteBtn btn btn-danger" >삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -48,20 +52,22 @@
 	
 	<script>
 		$(document).ready(function(e){
-			$('#deleteBtn').on('click',function(e){
-			
+			$('.deleteBtn').on('click',function(e){
+				//alert("click");
+				 $('.deleteBtn').parent().parent().remove();
 				
-				$.ajax({
-					type: "GET"
+				
+				 $.ajax({
+					type: "POST"
 					,url: "/lesson06/delete_favorite"
-					,data: 
-					,success(data): function(e){
-						
+					,success: function(data){
+					
+						location.href="/lesson06/get_favorite"
 					}
 					,error: function(e) {
 						alert("error");
 					}
-				});
+				}); 
 			});
 		});
 	</script>
