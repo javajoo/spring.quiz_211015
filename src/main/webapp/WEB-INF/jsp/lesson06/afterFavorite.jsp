@@ -43,7 +43,15 @@
 					<td>${favoriteList.id}</td>
 					<td>${favoriteList.name}</td>
 					<td>${favoriteList.url}</td>
-					<td><button type="button" class="deleteBtn btn btn-danger" value="${favoriteList.id}">삭제</button></td>
+					<td>
+					<%-- 1) name 속성과 value 속성을 이용해서 삭제버튼 감지 --%>
+					
+					
+					<%-- 2) data를 이용해서 태그에 임시 저장해놓기 --%>
+					<!-- id로 하면 하나의 버튼만 선택되니까 class로 해서 여러버튼 선택될 수 있도록 해준다. -->
+					<!-- data-favorite-id 무조건 하이픈으로 연결해줘야 한다.  data- : 문법 뒤부터가 변수!!-->
+					<button type="button" class="deleteBtn btn btn-danger" data-favorite-id="${favoriteList.id}">삭제</button>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -52,23 +60,41 @@
 	
 	<script>
 		$(document).ready(function(e){
-			$('.deleteBtn').on('click',function(e){
+			// 1) name 속성과 value 속성을 이용해서 삭제버튼 감지
+			    //var id = e.target.value;
+		
+			// 2) data를 이용해서 태그에 임시 저장해놓기
+		 	$('.deleteBtn').on('click',function(e){
+				//var id = $(this).attr('value'); 
 				
+				// 많이 사용한다!! 잘 알고 있기!!
+				// 태그: date-favorite-id 속성      date-   그 뒤부터는 우리가 이름을 정한다. (반드시 -)
+				// 자바스크립트 : $(this).data('favorite-id');
+				var id = $(this).data("favorite-id");
+				//alert(id);
 				
-				 $.ajax({
+				// id가 반드시 있어야 그 행이 삭제된다. id를 안넘기면 전체가 삭제된다.
+			
+				
+				// AJAX를 호출했는데 ERROR 쪽으로 가면 통신 자체가 안된 것이다.
+				  $.ajax({
+					// POST 방어용으로 좋다!!! (개인정보)
 					type: "POST"
 					,url: "/lesson06/delete_favorite"
-					/* $('.deleteBtn').attr('value')로 값 꺼내면 첫번째 버튼에 대한 value가 삭제,
-					$(this)로 셀렉터 잡아주면 원하는 행 삭제할 수 있다.*/
-					 , data: {id:$(this).attr('value')}
+					// "id" : controller의 값 , id: jsp의 값
+					,data: {"id":id}
 					,success: function(data){
-						alert(data);
-						location.href="/lesson06/get_favorite"
+						//alert(data.result); // controller의 result 키 값 호출
+					
+								location.reload(); // 새로고침
+								//location.href="/lesson06/get_favorite"
+						
+						// controller에서 삭제가 되고 나서 들어오기 때문에 여기서는 새로고침만 해주면 된다.
 					}
 					,error: function(e) {
 						alert("error");
 					}
-				}); 
+				});  
 			});
 		});
 	</script>

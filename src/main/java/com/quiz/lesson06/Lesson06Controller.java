@@ -7,12 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.quiz.lesson06.bo.FavoriteBO;
 import com.quiz.lesson06.model.Favorite;
@@ -89,13 +87,20 @@ public class Lesson06Controller {
 		return result;
 	}
 	
+	
+	// 즐겨찾기 삭제 - AJAX 호출로 들어오는 요청(String)
 	@ResponseBody
 	@PostMapping("/lesson06/delete_favorite")
-	public String deleteFavorite(
-			@RequestParam(value="id") int id) {
+	public Map<String, String> deleteFavorite(
+			@RequestParam("id") int id) {
 		
+		// DB delete
 		favoriteBO.deleteFavoriteById(id);
-		return "삭제완료";
+		
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "sucess");
+		
+		return result;
 	}
 
 }
