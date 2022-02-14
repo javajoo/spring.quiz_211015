@@ -76,7 +76,25 @@ public class Lesson06Quiz03Controller {
 	}
 	
 	@RequestMapping("/lesson06/booking_check")
-	public String bookingCheck() {
+	public String bookingCheck(Model model) {
+		
+		List<Booking> booking = bookingBO.getBookingList();
+		model.addAttribute("booking",booking);
+		
 		return "lesson06/bookingCheck";
+	}
+	
+	@PostMapping("/lesson/check")
+	@ResponseBody
+	public Map<String, String> check(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber
+			) {
+		
+		bookingBO.getBookingListByNamePhoneNumber(name, phoneNumber);
+		
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "sucess");
+		return result;
 	}
 }
