@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>예약조회</title>
+<link rel="styleSheet" type="text/css" href="/css/booking.css">
 <!-- ajax 통신을 사용하려면 가장 기본적인 제이쿼리 cdn 가져와야 한다. -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -27,6 +28,102 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-
+	<div class="container">
+		<header>
+			<div class="display-4 text-center">
+				<div>통나무 팬션</div>
+			</div>
+		</header>
+		<nav>
+			<ul class="nav nav-fill ">
+				<li class="nav-item"><a href="#" class="nav-link text-white">펜션소개</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-white">객실보기</a></li>
+				<li class="nav-item"><a href="/lesson06/booking_reserve" class="nav-link text-white">예약하기</a></li>
+				<li class="nav-item"><a href="/lesson06/booking_list" class="nav-link text-white">예약목록</a></li>
+			</ul>
+		</nav>
+		<section>
+			<section class="content1 bg-success">
+				<img id="bannerImage" src="/images/test06_banner1.jpg" alt="banner" width="1110" height="400">
+			</section>
+			<section class="content2 d-flex">
+				<div class="div1 col-4 text-white display-4 d-flex justify-content-center align-items-center">
+					<div>실시간<br>예약하기</div>
+				</div>
+				<div class="div2 col-4">
+					<div class="text-white pt-3 pl-3"><h3>예약 확인</h3></div>
+					<div class="form-group d-flex justify-content-end pr-5 text-white">
+						<label for="name">이름:</label>
+						<div><input type="text" class="form-control" id="name" name="name"></div>
+					</div>
+					<div class="form-group d-flex justify-content-end pr-5 text-white">
+						<label for="phoneNumber">전화번호:</label>
+						<div><input type="text" class="form-control" id="phoneNumber" name="phoneNumber"></div>
+					</div>
+					
+					<div class="d-flex justify-content-end">
+						<button type="button" class="check-btn btn-success form-control col-4">조회 하기</button>
+					</div>
+				</div>
+				<div class="div1 col-4 text-white d-flex justify-content-center align-items-center font-weignt-bold">
+					<div><h3>예약문의:<br>010-<br>0000-1111</h3></div>
+				</div>
+			</section>
+			
+		</section>
+		<footer>
+			<small class="text-secondary">
+			제주특별자치도 제주시 애월읍<br>
+			사업자등록번호: 111-22-255222 / 농어촌민박사업자지정 / 대표:김통목<br>
+			Copyrignt 2025 tongnamu. All right reserved.
+			</small>
+		</footer>
+	</div>
+	
+	<script>
+		$(document).ready(function(e){
+			//alert("click");
+			var bannerImage = [
+				'/images/test06_banner1.jpg',
+				'/images/test06_banner2.jpg',
+				'/images/test06_banner3.jpg',
+				'/images/test06_banner4.jpg'];
+			var currentIndex = 0;
+			
+			setInterval(function() {
+				$('#bannerImage').attr('src',bannerImage[currentIndex]);
+				currentIndex++;
+				
+				if (currentIndex > bannerImage.length) {
+					 currentIndex = 0;
+				}
+					
+				
+			
+			}, 3000);
+			
+			$('.check-btn').on('click',function(e){
+				//alert("click");
+				var name = $('#name').val().trim();
+				if (name == '') {
+					alert("이름을 입력하세요");
+					return;
+				}
+				
+			
+				
+				var phoneNumber = $('#phoneNumber').val().trim();
+				if (phoneNumber == '') {
+					alert("전화번호을 입력하세요");
+					return;
+				}
+				
+				alert("이름:" + "\n" + "날짜:" + "\n" + "일수:" + "\n" + "인원:" + "\n" + "상태:" );
+				
+			});
+				
+			
+		});
+	</script>
 </body>
 </html>

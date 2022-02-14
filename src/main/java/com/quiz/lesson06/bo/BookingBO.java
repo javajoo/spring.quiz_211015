@@ -20,4 +20,8 @@ public class BookingBO {
 	public void deleteBooking(int id) {
 		bookingDAO.deleteBooking(id);
 	}
+	
+	public void insertBooking(String name,String date,int day,int headcount,String phoneNumber) {
+		bookingDAO.insertBooking(name, date, day, headcount, phoneNumber);
+	}
 }

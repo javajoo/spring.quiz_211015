@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ public class Lesson06Quiz03Controller {
 	@Autowired
 	private BookingBO bookingBO;
 	
+	// db mysql 3-5
 	//http://localhost/lesson06/booking_list
 	@RequestMapping("/lesson06/booking_list")
 	public String bookingListView(Model model) {
@@ -38,7 +40,7 @@ public class Lesson06Quiz03Controller {
 	public Map<String,String> delete(
 			@RequestParam("id") int id) {
 		
-		//DB select
+		//DB delete
 		bookingBO.deleteBooking(id);
 		
 		Map<String, String> result = new HashMap<>();
@@ -48,11 +50,33 @@ public class Lesson06Quiz03Controller {
 		return result;
 	}
 	
-	//@ResponseBody()
-	//@PostMapping("/lesson06/booking_reserve")
 	@RequestMapping("/lesson06/booking_reserve")
 	public String bookingReserve() {
 		return "lesson06/bookingReserve";
 	}
 	
+	@PostMapping("/lesson06/add")
+	@ResponseBody
+	public Map<String, String> add(
+			@RequestParam("name") String name,
+			@RequestParam("date") String date,
+			@RequestParam("day") int day,
+			@RequestParam("headcount") int headcount,
+			@RequestParam("phoneNumber") String phoneNumber
+			) {
+		
+		//DB insert
+		bookingBO.insertBooking(name, date, day, headcount, phoneNumber);
+		
+		
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "success");
+		
+		return result;
+	}
+	
+	@RequestMapping("/lesson06/booking_check")
+	public String bookingCheck() {
+		return "lesson06/bookingCheck";
+	}
 }

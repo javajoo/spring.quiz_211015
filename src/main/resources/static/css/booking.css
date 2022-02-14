@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
 header {height: 100px;}
-nav {height: 40px; background-color: orange;}
-section {height: 600px;}
+nav {height: 40px; background-color:#DB9700;}
+section {height: 650px;}
+.content1 {height: 400px; }
+.content2 {height: 250px; }
+.div1 { background-color: #A91717;}
+.div2 {background-color: #DB9700;}
 footer {height: 100px;}

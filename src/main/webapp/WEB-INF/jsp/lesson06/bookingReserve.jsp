@@ -38,10 +38,10 @@
 		</header>
 		<nav>
 			<ul class="nav nav-fill ">
-				<li class="nav-item"><a href="" class="nav-link text-white">펜션소개</a></li>
-				<li class="nav-item"><a href="" class="nav-link text-white">객실보기</a></li>
-				<li class="nav-item"><a href="" class="nav-link text-white">예약하기</a></li>
-				<li class="nav-item"><a href="" class="nav-link text-white">예약목록</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-white">펜션소개</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-white">객실보기</a></li>
+				<li class="nav-item"><a href="/lesson06/booking_reserve" class="nav-link text-white">예약하기</a></li>
+				<li class="nav-item"><a href="/lesson06/booking_list" class="nav-link text-white">예약목록</a></li>
 			</ul>
 		</nav>
 		<section>
@@ -49,8 +49,8 @@
 			
 			<div class="d-flex justify-content-center">
 				<div class="form-group">
-					<label for=""><b>이름</b></label>
-					<input type="text" class="form-control" id="" name="">
+					<label for="name"><b>이름</b></label>
+					<input type="text" class="form-control" id="name" name="name">
 				</div>
 			</div>
 			
@@ -83,7 +83,7 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-			<div><button type="button" class="btn btn-warning form-control">예약하기</button></div>
+			<div><button type="button" id="reserveBtn" class="btn btn-warning form-control">예약하기</button></div>
 			</div>
 		</section>
 		<footer>
@@ -96,11 +96,68 @@
 	</div>
 	
 	<script>
-		$(document).ready(function(e) {
-			//alert("alert");
-			$('#date').datepicker({
-				dateFormat: "yy-mm-dd";
+		
+		$(document).ready(function(){
+			//alert("click");
+			/* $('#date').datepicker({
+				dateFormat: 'yy-mm-dd' // 2022-02-07
+			}); */
+			
+			$('#reserveBtn').on('click',function(e){
+				//alert("click");
+				var name = $('#name').val().trim();
+				if (name == '') {
+					alert("이름을 입력하세요");
+					return;
+				}
+				
+				var date = $('#date').val().trim();
+				if (date == '') {
+					alert("날짜를 입력하세요");
+					return;
+				}
+				
+				var day = $('#day').val().trim();
+				if (day == '') {
+					alert("숙박일수를 입력하세요");
+					return;
+				}
+				
+				var headcount = $('#headcount').val().trim();
+				if (headcount == '') {
+					alert("숙박인원을 입력하세요");
+					return;
+				}
+				
+				var phoneNumber = $('#phoneNumber').val().trim();
+				if (phoneNumber == '') {
+					alert("전화번호를 입력하세요");
+					return;
+				}
+				
+				$.ajax({
+					type : "post"
+					,url:"/lesson06/add"
+					,data:
+						{"name":name
+						,"date":date
+						,"day":day
+						,"headcount":headcount
+						,"phoneNumber":phoneNumber}
+					,success: function(data) {
+						if(data.result == "success"){
+							alert(data.result);
+							location.reload();
+						}
+					
+					}
+					,error: function(e) {
+						alert("error");
+					}
+				});
+				
 			});
+			
 		});
 		
 	</script>

@@ -36,10 +36,10 @@
 		</header>
 		<nav>
 			<ul class="nav nav-fill ">
-				<li class="nav-item"><a href="" class="nav-link text-white">펜션소개</a></li>
-				<li class="nav-item"><a href="" class="nav-link text-white">객실보기</a></li>
-				<li class="nav-item"><a href="" class="nav-link text-white">예약하기</a></li>
-				<li class="nav-item"><a href="" class="nav-link text-white">예약목록</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-white">펜션소개</a></li>
+				<li class="nav-item"><a href="#" class="nav-link text-white">객실보기</a></li>
+				<li class="nav-item"><a href="/lesson06/booking_reserve" class="nav-link text-white">예약하기</a></li>
+				<li class="nav-item"><a href="/lesson06/booking_list" class="nav-link text-white">예약목록</a></li>
 			</ul>
 		</nav>
 		<section>
@@ -60,21 +60,21 @@
 					<c:forEach items="${booking}" var="booking">
 					<tr>
 						<td>${booking.name}</td>
-						<td>${booking.date}</td>
+						<td>
+							<fmt:parseDate value="${booking.date}" pattern="yyyy-MM-dd" var="date" />
+							<fmt:formatDate value="${date}" pattern="yyyy년MM월dd일"  />
+						</td>
 						<td>${booking.day}</td>
 						<td>${booking.headcount}</td>
 						<td>${booking.phoneNumber}</td>
 						<td>
-							${booking.state}
-							<%-- <c:choose>
-								<c:if test="${booking.state == '대기중'}">
-									<span class="text-primary">${booking.state}</span>
-								</c:if>
-								
-								<c:if test="${booking.state == '확정'}">
-									<span class="text-success">${booking.state}</span>
-								</c:if>
-							</c:choose> --%>
+							<c:if test="${booking.state == '대기중'}">
+								<span class="text-primary">${booking.state}</span>
+							</c:if>
+							
+							<c:if test="${booking.state == '확정'}">
+								<span class="text-success">${booking.state}</span>
+							</c:if>
 						</td>
 						<td>
 							<button type="button" class="del-btn btn-danger form-control" data-booking-id="${booking.id}">삭제</button>
