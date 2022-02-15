@@ -11,16 +11,18 @@ import com.quiz.lesson06.model.Booking;
 public interface BookingDAO {
 	public List<Booking> selectBookingList();
 
-	public void deleteBooking(int id);
+	public int deleteBookingById(int id);
 	
-	public void insertBooking(
+	public int insertBooking(
 			@Param("name") String name,
 			@Param("date") String date,
 			@Param("day") int day,
 			@Param("headcount") int headcount,
-			@Param("phoneNumber") String phoneNumber);
+			@Param("phoneNumber") String phoneNumber
+			);
 	
-	public List<Booking> selectBookingListByNamePhoneNumber(
+	// 여러개가 있다고 가정
+	public List<Booking> selectBookingByNamePhoneNumber(
 			@Param("name") String name,
 			@Param("phoneNumber") String phoneNumber);
 }

@@ -30,8 +30,8 @@
 <body>
 	<div class="container">
 		<header>
-			<div class="display-4 text-center">
-				<div>통나무 팬션</div>
+			<div class="display-4 d-flex justify-content-center pt-3">
+				<div><a href="/lesson06/booking_check" class="logo">통나무 팬션</a></div>
 			</div>
 		</header>
 		<nav>
@@ -90,6 +90,7 @@
 				'/images/test06_banner4.jpg'];
 			var currentIndex = 0;
 			
+			// setInterval 함수가 2개 (이벤트,시간)
 			setInterval(function() {
 				$('#bannerImage').attr('src',bannerImage[currentIndex]);
 				currentIndex++;
@@ -102,15 +103,16 @@
 			
 			}, 3000);
 			
+			// 조회하기 버튼 클릭 이벤트
 			$('.check-btn').on('click',function(e){
 				//alert("click");
+				
+				// 유효성 검사
 				var name = $('#name').val().trim();
 				if (name == '') {
 					alert("이름을 입력하세요");
 					return;
 				}
-				
-			
 				
 				var phoneNumber = $('#phoneNumber').val().trim();
 				if (phoneNumber == '') {
@@ -118,12 +120,42 @@
 					return;
 				}
 				
-				alert(
-					"이름:" + "\n" + 
-					"날짜:" + "\n" + 
-					"일수:" + "\n" + 
-					"인원:" + "\n" + 
-					"상태:" );
+				if (phoneNumber.startsWith('010') == false) {
+					alert('010으로 시작하는 번호만 입력할 수 있습니다');
+					return;
+				}
+				
+			
+				
+				$.ajax({
+					type: "POST"
+					,url: "/lesson06/check"
+					,data: {"name": name, "phoneNumber": phoneNumber }
+					,success: function(data) {
+						// 성공시
+						// {"result": "success",
+						// "code" : "1",
+						// "booking": {"name: "신보람", "phonenumber": "010-222-2222"}}
+						
+						if (data.code == 1) {
+							// 성공
+							var booking = data.booking;
+							var message = "이름:" + booking.name + "\n날짜:" + booking.date.slice(0,10) + "\n일수:" + booking.day
+							+ "\n인원:" + booking.headcount + "\n상태:" + booking.state;
+							
+							alert(message);
+						} else {
+							// 실패
+							alert('예약 내역이 없습니다');
+						}
+						
+					}
+					,error: function(e) {
+						alert('서버 통신 실패');
+					}
+					
+					
+				});
 				
 			});
 				

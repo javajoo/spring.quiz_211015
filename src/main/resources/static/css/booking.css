@@ -1,6 +1,8 @@
 @charset "UTF-8";
-
 header {height: 100px;}
+/* id나 class에 이름지어주고 hover 해줘야 한다.!!!! */
+.logo {text-decoration: none; color:black;}
+.logo:hover {text-decoration: none; color:black;}
 nav {height: 40px; background-color:#DB9700;}
 section {height: 650px;}
 .content1 {height: 400px; }

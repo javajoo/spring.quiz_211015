@@ -30,8 +30,8 @@
 <body>
 	<div class="container">
 		<header>
-			<div class="display-4 text-center">
-				<div>통나무 팬션</div>
+			<div class="display-4 d-flex justify-content-center pt-3">
+				<div><a href="/lesson06/booking_check" class="logo">통나무 팬션</a></div>
 			</div>
 		</header>
 		<nav>
@@ -61,19 +61,27 @@
 					<tr>
 						<td>${booking.name}</td>
 						<td>
-							<fmt:parseDate value="${booking.date}" pattern="yyyy-MM-dd" var="date" />
-							<fmt:formatDate value="${date}" pattern="yyyy년MM월dd일"  />
+						<!-- 길게 나오면 date 객체이다. 
+							 formatdate는 date -> string으로 만들어준다.
+							 parsedate는 date 객체로 만들어준다. 
+							 객체에서는 Date로 해준다.
+						 -->
+							<fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 d일"  />
 						</td>
 						<td>${booking.day}</td>
 						<td>${booking.headcount}</td>
 						<td>${booking.phoneNumber}</td>
 						<td>
 							<c:if test="${booking.state == '대기중'}">
-								<span class="text-primary">${booking.state}</span>
+								<span class="text-info">${booking.state}</span>
 							</c:if>
 							
 							<c:if test="${booking.state == '확정'}">
 								<span class="text-success">${booking.state}</span>
+							</c:if>
+							
+							<c:if test="${booking.state == '취소'}">
+								<span class="text-danger">${booking.state}</span>
 							</c:if>
 						</td>
 						<td>
@@ -96,20 +104,26 @@
 	<script>
 		$(document).ready(function(e){
 			//alert("c");
+			/* 버튼이 여러개 일때 클래스로 지정 해준다.*/
 			$('.del-btn').on('click',function(e){
 				//alert("c");
+				/* this 키워드로 잡아야 6개 버튼 중에서 클릭된 하나의 버튼을 가져온다. */
 			var id = $(this).data('booking-id');
 			//alert(id);
 			  $.ajax({
-				type: "POST"
-				,url: "/lesson06/delete"
-				,data: {"id":id}
-				,success: function(data) {
+				  /* 대표적: post, get 방식 이지만 delete도 있다. controller에서도 똑같이 해주면 된다.*/
+				type: "DELETE"
+				, url: "/lesson06/delete"
+				, data: {"id":id} /* 왼쪽: controller 오른쪽: jsp */
+				, success: function(data) {
 					alert(data.result);
-					location.reload();
+					// 성공적으로 삭제된 후에 새로고침
+					if (data.result == "success") {
+						location.reload();
+					}
 				}
-				,error: function(e) {
-					alert("에러");
+				, error: function(e) {
+					alert("관리자에게 문의 해주세요");
 				}
 			}); 
 		  });

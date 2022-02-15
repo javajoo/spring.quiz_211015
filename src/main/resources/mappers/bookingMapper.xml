@@ -18,7 +18,7 @@
  			`booking`
  	</select>
  	
- 	<delete id="deleteBooking" parameterType="int">
+ 	<delete id="deleteBookingById" parameterType="int">
  		DELETE 
  		FROM
  			`booking`
@@ -34,6 +34,7 @@
 			,`day`
 			,`date`
 			,`phoneNumber`
+			,`state`
 			,`createdAt`
 			,`updatedAt`
  		)
@@ -44,12 +45,14 @@
  			,#{day}
  			,#{date}
  			,#{phoneNumber}
+ 			,'대기중' 
+ 			<!-- 고정값으로 넣어줄 때 여기서 써주면 된다. 사용자로부터 값 안받을 때-->
  			,NOW()
  			,NOW()
  		)
  	</insert>
  	
- 	<select id="selectBookingListByNamePhoneNumber" parameterType="map" resultType="com.quiz.lesson06.model.Booking">
+ 	<select id="selectBookingByNamePhoneNumber" parameterType="map" resultType="com.quiz.lesson06.model.Booking">
  		SELECT
  			`id`
 			,`name`
@@ -62,5 +65,8 @@
 			,`updatedAt`
  		FROM 
  			`booking`
+ 		WHERE
+ 			`name` = #{name}
+ 			AND `phoneNumber` = #{phoneNumber}
  	</select>
  </mapper>
