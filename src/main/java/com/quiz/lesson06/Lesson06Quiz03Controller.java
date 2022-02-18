@@ -122,7 +122,7 @@ public class Lesson06Quiz03Controller {
 			
 			result.put("result", "success");
 			result.put("code", 1); //Object이기 때문에 숫자만 넣어줘도 된다.
-			result.put("booking", booking);
+			result.put("booking", booking); // 키로 불러와서 booking 값 내려준다.
 		} else {
 			// 실패시, 없으면
 			// {"result": "fail", "code": "500"}
